@@ -4,8 +4,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "instances/nug12.dat";
-const char* FILE_SOLUTION = "nug12.txt";
+const char* FILE_DATA = "../instances/nug12.dat";
+const char* FILE_SOLUTION = "../instances/nug12.sln";
 
 const int N_MAX = 1000;
 int n;
@@ -16,49 +16,39 @@ int objectiveValue;
 int sol[N_MAX];
 
 bool readData() {
-    freopen(FILE_DATA, "r", stdin);
+    ifstream in(FILE_DATA);
+
+    if(!in) {
+        cout << "Data file not open !" << endl;
+        return false;
+    }
 
     // Number of data
-    scanf("%d", &n);
-    cout << n << endl;
+    in >> n;
 
     // Distances matrix
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            scanf("%d", f[i] + j);
+            in >> d[i][j];
         }
     }
 
     // Flow matrix
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            scanf("%d", d[i] + j);
+            in >> f[i][j];
         }
     }
 
+    in.close();
     return true;
 }
 
 bool readSolution() {
-//    freopen(FILE_SOLUTION, "r", stdin);
-//
-//    // Number of data
-//    scanf("%d", &n);
-//    cout << n << endl;
-//
-//    // Objective value
-//    scanf("%d", &objectiveValue);
-//    cout << objectiveValue << endl;
-//
-//    // Solution vector
-//    for(int i = 0; i < n; i++) {
-//        scanf("%d", sol + i);
-//    }
-
-    ifstream in(R"(C:\Users\Aymerick\Documents\Ma1 - Ing Civil IG\Q1\Graphes et Optimisation combinatoire\Challenge\instances\nug12.sln)");
+    ifstream in(FILE_SOLUTION);
 
     if(!in) {
-        cout << "File not open !" << endl;
+        cout << "Solution file not open !" << endl;
         return false;
     }
 
@@ -72,6 +62,7 @@ bool readSolution() {
     for(int i = 0; i < n; i++) {
         in >> sol[i];
     }
+
     in.close();
     return true;
 }
@@ -79,12 +70,25 @@ bool readSolution() {
 int main() {
     cout << "Hello, World!" << endl;
 
-//    // Read inputs
-//    readData();
+    // Read inputs
+    if(!readData()) return -1;
+    cout << "Distances matrix : " << endl;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            cout << " " << d[i][j];
+        }
+        cout << endl;
+    }
+    cout << "Flow matrix : " << endl;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            cout << " " << f[i][j];
+        }
+        cout << endl;
+    }
 
     // Read the solution
     if(!readSolution()) return -1;
-
     cout << "n = " << n << endl;
     cout << "Objective value : " << objectiveValue << endl;
     cout << "Optimal solution :";
