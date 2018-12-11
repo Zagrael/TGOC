@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 
+#include "GRASP.h"
+
 using namespace std;
 
 const char* FILE_DATA = "../instances/nug12.dat";
@@ -86,6 +88,11 @@ int main() {
         }
         cout << endl;
     }
+
+    // Apply GRASP algorithm
+    float alpha = 0.2;
+    int solution[N_MAX];
+    GRASP(alpha, solution, n);
 
     // Read the solution
     if(!readSolution()) return -1;
