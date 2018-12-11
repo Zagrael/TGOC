@@ -5,8 +5,10 @@
 #ifndef CHALLENGE_GRASP_H
 #define CHALLENGE_GRASP_H
 
-#include "GRASP.cpp"
 
-void GRASP(float, int[], int);
+class GRASP {
+
+};
+
 
 #endif //CHALLENGE_GRASP_H
