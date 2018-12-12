@@ -3,16 +3,14 @@
 #include <string>
 
 #include "GRASP.h"
+#include "common.h"
 
 using namespace std;
 
 const char* FILE_DATA = "../instances/nug12.dat";
 const char* FILE_SOLUTION = "../instances/nug12.sln";
 
-#ifndef N_MAX
 const int N_MAX = 1000;
-#endif
-
 int n;
 int f[N_MAX][N_MAX];
 int d[N_MAX][N_MAX];

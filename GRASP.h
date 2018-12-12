@@ -6,10 +6,7 @@
 #define CHALLENGE_GRASP_H
 
 #include <time.h>
-
-#ifndef  N_MAX
-const int N_MAX = 1000;
-#endif
+#include "common.h"
 
 class GRASP {
 
