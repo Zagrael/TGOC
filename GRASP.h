@@ -5,6 +5,8 @@
 #ifndef CHALLENGE_GRASP_H
 #define CHALLENGE_GRASP_H
 
+#include <time.h>
+
 #ifndef  N_MAX
 const int N_MAX = 1000;
 #endif
@@ -33,7 +35,7 @@ public:
     /*
      * Algorithm
      * */
-    int *run();
+    int *run(const float &);
     const int *greedyProbability();
     const int *localSearch(const int*);
     void updateBest(const int*);

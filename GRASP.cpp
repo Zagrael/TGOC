@@ -24,8 +24,12 @@ int GRASP::getObjectiveValue() const {
     return objectiveValue;
 }
 
-int *GRASP::run() {
-    return nullptr;
+int *GRASP::run(const float &maxSec) {
+    clock_t t_init = clock();
+
+    do {
+        updateBest(localSearch(greedyProbability()));
+    } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxSec);
 }
 
 const int *GRASP::greedyProbability() {
