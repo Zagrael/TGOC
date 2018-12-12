@@ -7,6 +7,7 @@
 
 #include <time.h>
 #include "common.h"
+#include "QAP.h"
 
 class GRASP {
 

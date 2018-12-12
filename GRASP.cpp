@@ -44,5 +44,11 @@ int *GRASP::localSearch(const int *s) {
 }
 
 void GRASP::updateBest(const int *s) {
-
+    int obj = QAP::computeObjectiveValue(this->n, s, this->F, this->D);
+    if(obj < this->objectiveValue) {
+        for(int i = 0; i < n; i++) {
+            this->solution[i] = s[i];
+        }
+        this->objectiveValue = obj;
+    }
 }

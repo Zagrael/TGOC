@@ -12,7 +12,7 @@
 class QAP {
 
 public:
-    static int computeObjectiveValue(const int&, int[], int[][N_MAX], int[][N_MAX]);
+    static int computeObjectiveValue(const int&, const int[], int[][N_MAX], int[][N_MAX]);
 };
 
 

@@ -4,7 +4,7 @@
 
 #include "QAP.h"
 
-int QAP::computeObjectiveValue(const int &n, int solution[], int F[][N_MAX], int D[][N_MAX]) {
+int QAP::computeObjectiveValue(const int &n, const int solution[], int F[][N_MAX], int D[][N_MAX]) {
     int value = 0;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
