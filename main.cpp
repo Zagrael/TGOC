@@ -2,6 +2,10 @@
 #include <fstream>
 #include <string>
 
+#include "problem.h"
+#include "antsystem.h"
+#include <cstdlib>
+
 using namespace std;
 
 const char* FILE_DATA = "../instances/nug12.dat";
@@ -67,7 +71,7 @@ bool readSolution() {
     return true;
 }
 
-int main() {
+int main(int argc, char **argv) {
     cout << "Hello, World!" << endl;
 
     // Read inputs
@@ -96,5 +100,29 @@ int main() {
         cout << " " << sol[i];
     }
 
-    return 0;
+    // villes, borne sup, borne inf, coeff d'évaporation en %
+
+    int nbIterations = 5000 ;
+    int nbFourmis = 10;
+    if (argc > 1){
+        n = atoi(argv[1]);
+        nbIterations = atoi(argv[2]);
+        nbFourmis = atoi(argv[3]);
+    }
+
+    srand(0);
+    problem p(n, 5000, 1, .05f);
+
+    cout<<"\n";
+    cout << "Données enregistrées" << endl;
+
+    // nombre de fourmis
+    antSystem sys(nbFourmis, p);
+
+    cout << "Système créé" << endl;
+
+    // unités de temps
+    sys.run(nbIterations);
+
+    cout << sys.pathCount << "chemins testés" << endl;
 }
