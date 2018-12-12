@@ -21,6 +21,10 @@ class GRASP {
 public:
     // Constructor
     GRASP(const float&, const int&, const int[][N_MAX], const int[][N_MAX]);
+
+    // Getters
+    const int *getSolution() const;
+    int getObjectiveValue() const;
 };
 
 

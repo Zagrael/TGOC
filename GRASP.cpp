@@ -15,3 +15,11 @@ GRASP::GRASP(const float &alpha, const int &n, const int F[][N_MAX], const int D
         }
     }
 }
+
+const int *GRASP::getSolution() const {
+    return solution;
+}
+
+int GRASP::getObjectiveValue() const {
+    return objectiveValue;
+}
