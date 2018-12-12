@@ -1,12 +1,14 @@
 //
 // Created by Sabrine Riahi on 2018-12-11.
 //
-
+#include <iostream>
 #include "ant.h"
 
 #include "problem.h"
 #include "antexception.h"
 #include <algorithm>
+
+using namespace std ;
 
 ant::ant(problem& d):data(d){
     tmpVisitedLength = 0;
@@ -27,7 +29,7 @@ void ant::frame(){
             tmpVisitedLength ++;
         case RETURNING:
             currentArcPos++;
-            if (currentArcPos >= currentArcSize)
+            if (currentArcPos >= currentArcLength)
                 findNextSearchDestination();
             break;
         case NOTHING:
@@ -54,9 +56,11 @@ void ant::findNextSearchDestination(){
             currentOrigin = 0;
             currentDestination = dest;
             currentArcPos = 0;
-            currentArcSize = data.distances[0][currentDestination];
+            currentArcLength = data.distances[0][currentDestination];
+            cout<<"currentDestination : "<<currentDestination;
+            cout<<"currentArcLength : "<<currentArcLength<<endl;
             currentArcFlowSize = data.flows[0][currentDestination];
-            currentArcCost = currentArcFlowSize*currentArcSize;
+            currentArcCost = currentArcFlowSize*currentArcLength;
 
             break;
         }
@@ -87,19 +91,19 @@ void ant::findNextSearchDestination(){
                 state = RETURNING;
                 currentOrigin =  int(visitedPlaces.size())-1;
                 currentDestination = int(visitedPlaces.size())-2;
-                currentArcSize = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
+                currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
                 currentArcFlowSize = data.flows[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
-                currentArcCost = currentArcFlowSize*currentArcSize;
-                currentArcPos = currentArcSize;
+                currentArcCost = currentArcFlowSize*currentArcLength;
+                currentArcPos = currentArcLength;
                 return;
             }
 
             int dest = getNearCity(currentDestination);
             currentOrigin = currentDestination;
             currentDestination = dest;
-            currentArcSize = data.distances[currentOrigin][currentDestination];
+            currentArcLength = data.distances[currentOrigin][currentDestination];
             currentArcFlowSize = data.flows[currentOrigin][currentDestination];
-            currentArcCost = currentArcFlowSize*currentArcSize;
+            currentArcCost = currentArcFlowSize*currentArcLength;
             currentArcPos = 0;
             break;
         }
@@ -120,10 +124,10 @@ void ant::findNextSearchDestination(){
             data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], cstVisitedLength );
             currentOrigin = currentDestination;
             currentDestination --;
-            currentArcSize = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
+            currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
             currentArcFlowSize = data.flows[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
-            currentArcCost = currentArcSize*currentArcFlowSize;
-            currentArcPos = currentArcSize;
+            currentArcCost = currentArcLength*currentArcFlowSize;
+            currentArcPos = currentArcLength;
 
             break;
         }

@@ -48,7 +48,7 @@ class ant{
         // données courantes
 
         // longueur de l'arc actuellement parcouru
-        long currentArcSize;
+        long currentArcLength;
 
         // position sur l'arc actuellement parcouru
         long currentArcPos;
