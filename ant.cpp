@@ -94,6 +94,8 @@ void ant::findNextSearchDestination(){
                 currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
                 currentArcFlowSize = data.flows[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
                 currentArcCost = currentArcFlowSize*currentArcLength;
+                cout<<"currentDestination : "<<currentDestination;
+                cout<<"currentArcLength : "<<currentArcLength<<endl;
                 currentArcPos = currentArcLength;
                 return;
             }
