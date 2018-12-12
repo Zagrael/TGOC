@@ -33,8 +33,8 @@ public:
      * Algorithm
      * */
     int *run(const float &);
-    const int *greedyProbability();
-    const int *localSearch(const int*);
+    int *greedyProbability();
+    int *localSearch(const int*);
     void updateBest(const int*);
 };
 
