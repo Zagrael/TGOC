@@ -23,3 +23,19 @@ const int *GRASP::getSolution() const {
 int GRASP::getObjectiveValue() const {
     return objectiveValue;
 }
+
+int *GRASP::run() {
+    return nullptr;
+}
+
+const int *GRASP::greedyProbability() {
+    return nullptr;
+}
+
+const int *GRASP::localSearch(const int *s) {
+    return nullptr;
+}
+
+void GRASP::updateBest(const int *s) {
+
+}

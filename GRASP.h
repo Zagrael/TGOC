@@ -19,12 +19,24 @@ class GRASP {
     int objectiveValue;
 
 public:
-    // Constructor
+    /*
+     * Constructor
+     * */
     GRASP(const float&, const int&, const int[][N_MAX], const int[][N_MAX]);
 
-    // Getters
+    /*
+     * Getters
+     * */
     const int *getSolution() const;
     int getObjectiveValue() const;
+
+    /*
+     * Algorithm
+     * */
+    int *run();
+    const int *greedyProbability();
+    const int *localSearch(const int*);
+    void updateBest(const int*);
 };
 
 
