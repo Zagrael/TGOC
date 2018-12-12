@@ -30,6 +30,8 @@ int *GRASP::run(const float &maxSec) {
     do {
         updateBest(localSearch(greedyProbability()));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxSec);
+
+    return this->solution;
 }
 
 const int *GRASP::greedyProbability() {

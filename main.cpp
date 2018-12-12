@@ -92,8 +92,8 @@ int main() {
 
     // Apply GRASP algorithm
     float alpha = 0.2;
-    int solution[N_MAX];
-    GRASP(alpha, solution, n);
+    GRASP grasp = GRASP(alpha, n, f, d);
+    int* solution = grasp.run(maxTime);
 
     // Read the solution
     if(!readSolution()) return -1;
