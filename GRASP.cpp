@@ -35,12 +35,14 @@ int *GRASP::run(const float &maxSec) {
     return this->solution;
 }
 
-int *GRASP::greedyProbability() {
+const int *GRASP::greedyProbability() {
+    int s[N_MAX];
+    s[0] = rand() % n + 1; // Return a number between 1 and n
     return nullptr;
 }
 
-int *GRASP::localSearch(const int *s) {
-    return nullptr;
+const int *GRASP::localSearch(const int *s) {
+    return s;
 }
 
 void GRASP::updateBest(const int *s) {
