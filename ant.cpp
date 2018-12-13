@@ -42,23 +42,25 @@ void ant::findNextSearchDestination(){
     switch(state){
         case NOTHING:{
             //visitedPlaces.push_back(0);
-            visitedPlaces.push_back(rand()%data.nbPlaces);
+            int random;
+            random = rand()%data.nbPlaces;
+            visitedPlaces.push_back(random);
             std::vector<int>::iterator tmp = placesStillToAffect.begin();
             while (tmp != placesStillToAffect.end()){
-                if (*tmp == 0){
+                if (*tmp == random){
                     placesStillToAffect.erase(tmp);
                     break;
                 }
                 tmp++;
             }
 
-            int dest = getNearCity(0);
+            int dest = getNearCity(random);
             state = SEARCHING_PATH;
-            currentOrigin = 0;
+            currentOrigin = random;
             currentDestination = dest;
-            currentArcPos = 0;
-            currentArcLength = data.distances[0][currentDestination];
-            currentArcFlowSize = data.flows[0][currentDestination];
+            currentArcPos = random;
+            currentArcLength = data.distances[random][currentDestination];
+            currentArcFlowSize = data.flows[random][currentDestination];
             currentArcCost = currentArcFlowSize*currentArcLength;
 
             break;
@@ -111,7 +113,7 @@ void ant::findNextSearchDestination(){
                 // on a trouvé une solution optimale = visitedPlaces
                 // on change cette solution pour avoir les usines en fonction des emplacements = affectedFactories
 
-                cout << "visitedPlaces :" << endl;
+                /*cout << "visitedPlaces :" << endl;
                 for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
                     cout << *i << ' ';
                 }
@@ -135,6 +137,7 @@ void ant::findNextSearchDestination(){
                     cout << *i << ' ';
                 }
                 cout << "\n";
+                 */
 
                 // retournée au nid avec succès
                 data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], cstVisitedLength);
