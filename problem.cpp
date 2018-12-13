@@ -50,8 +50,8 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
     optimalLength = nbPlaces;
 }
 
-void problem::setPheromones(int i, int j, int wayCost){
-    float ph = 100.f*optimalLength / (wayCost + 1 - optimalLength);
+void problem::setPheromones(int i, int j, int obj){
+    float ph = 100.f*optimalLength / (obj + 1 - optimalLength);
 
     pheromones[i][j] += ph;
 

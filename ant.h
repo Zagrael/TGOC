@@ -29,7 +29,7 @@ class ant{
         long flwVisitedLength;
 
         // compteur du coût du chemin parcouru
-        long cstVisitedLength;
+        int objectif;
 
         // états possibles pour une fourmi
 

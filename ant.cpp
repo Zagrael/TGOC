@@ -12,7 +12,7 @@ using namespace std ;
 
 ant::ant(problem& d):data(d){
     tmpVisitedLength = 0;
-    cstVisitedLength = 0;
+    objectif = 0;
     currentArcPos = -1;
     currentDestination = 0;
     currentOrigin = 0;
@@ -87,7 +87,7 @@ void ant::findNextSearchDestination(){
                 // on revient vers le nid
                 tmpVisitedLength += data.distances[currentDestination][0];
                 flwVisitedLength += data.flows[currentDestination][0];
-                cstVisitedLength += tmpVisitedLength*flwVisitedLength;
+                objectif += tmpVisitedLength*flwVisitedLength;
 
                 state = RETURNING;
                 currentOrigin =  int(visitedPlaces.size())-1;
@@ -152,9 +152,10 @@ void ant::findNextSearchDestination(){
                 }
                 cout << "\n";
 
+                // calcul de l'objectif de la solution trouvée (affectedFactories)
 
                 // retournée au nid avec succès
-                data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], cstVisitedLength);
+                data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif);
 
                 // sauver le résultat, changer de fourmi
                 antException e;
@@ -165,7 +166,7 @@ void ant::findNextSearchDestination(){
 
             // trouver la ville précédemment visitée et la passer en destination
             // mettre des phéromones sur l'arc parcouru
-            data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], cstVisitedLength );
+            data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif );
             currentOrigin = currentDestination;
             currentDestination --;
             currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
