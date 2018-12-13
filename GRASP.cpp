@@ -51,7 +51,7 @@ const int *GRASP::localSearch(const int *s) {
 
 void GRASP::updateBest(const int *s) {
     int obj = QAP::computeObjectiveValue(this->n, s, this->F, this->D);
-    if(obj < this->objectiveValue) {
+    if(QAP::isAdmissibleSolution(n,s) && obj < this->objectiveValue) {
         for(int i = 0; i < n; i++) {
             this->solution[i] = s[i];
         }
@@ -60,14 +60,13 @@ void GRASP::updateBest(const int *s) {
 }
 
 int GRASP::choseProbability(float *prob) {
-    float p = 0.0f;
-    float r = ((float) rand() / (RAND_MAX));
+    float p = 0.00f;
+    float r = ((float) rand() / (RAND_MAX + 1));
 
     for(int i = 0; i < n; i++) {
         p += prob[i];
         if(r <= p) return i;
     }
-    std::cout << p << std::endl;
     return -1;
 }
 
@@ -97,7 +96,6 @@ float *GRASP::computeProbabilities(int *s, const int &nS, float *prob) {
             for(int q = 0; q < nS; q++)
                 cost += D[nS][q] * (F[s[q] - 1][i] + F[i][s[q] - 1]);
             costs[i] = cost;
-            std::cout << "cost for " << i << " : " << cost << std::endl;
             if(cost < minCost)
                 minCost = cost;
             if(cost > maxCost)
