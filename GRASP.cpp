@@ -3,7 +3,6 @@
 //
 
 #include "GRASP.h"
-#include <iostream>
 
 GRASP::GRASP(const float &alpha, const int &n, const int F[][N_MAX], const int D[][N_MAX]) {
 
@@ -42,7 +41,6 @@ const int *GRASP::greedyProbability(int* s) {
     int bestVal;
 
     s[0] = rand() % n + 1; // Return a number between 1 and n
-    std::cout << s[0] << std::endl;
 
     // Look at each places
     for(int j = 1; j < n; j++) {

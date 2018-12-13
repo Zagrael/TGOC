@@ -98,7 +98,8 @@ int main() {
     for(int i = 0; i < n; i++) {
         cout << " " << solution[i];
     }
-    cout << endl <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
+    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solution) ? "True" : "False") << endl;
+    cout <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
     // Read the solution
     if(!readSolution()) return -1;
