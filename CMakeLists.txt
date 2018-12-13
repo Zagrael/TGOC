@@ -3,4 +3,4 @@ project(Challenge)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Challenge main.cpp ant.cpp ant.h problem.cpp problem.h antsystem.cpp antsystem.h antexception.h)
+add_executable(Challenge main.cpp ant.cpp ant.h problem.cpp problem.h antsystem.cpp antsystem.h antexception.h QAP.cpp QAP.h)
