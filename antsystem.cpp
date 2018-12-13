@@ -9,12 +9,14 @@
 #include <algorithm>
 #include <iostream>
 
+using namespace std;
+
 
 antSystem::antSystem(int nbAnt, problem& d):data(d){
     for (int i=0; i<nbAnt; i++)
         ants.push_back(new ant(data));
 
-    bestLength = 999999;
+    bestObj = 999999;
     pathCount = 0;
     curIteration = 0;
 }
@@ -35,10 +37,11 @@ void antSystem::run(int n){
 
                 // La fourmi a trouvé une solution
                 // On notifie la solution, on crée une nouvelle fourmi et on supprime l'ancienne
-                if (e.state == antException::TO_REGISTER)
+                if (e.state == antException::TO_REGISTER) {
                     notifySolution(e.a->tmpVisitedLength, e.a->visitedPlaces);
+                }
 
-                if(bestLength <= data.optimalLength)
+                if(bestObj <= data.optimalLength)
                     return;
 
                 // on crée une nouvelle fourmi pour remplacer la fourmi courante
@@ -54,30 +57,30 @@ void antSystem::run(int n){
             data.evaporate();
 
         if (curIteration%50==0)
-            std::cout << "Meilleure longueur : " << bestLength << std::endl;
+            std::cout << "Longueur actuelle : " << bestObj << std::endl;
     }
 }
 
 
-void antSystem::notifySolution(int value, std::vector<int>& places){
+void antSystem::notifySolution(int value, std::vector<int>& factories){
 
-    if (bestLength == -1){
-        bestLength  = value;
-        bestSolution = places;
+    if (bestObj == -1){
+        bestObj  = value;
+        bestSolution = factories;
     }else{
 
         pathCount ++;
 
-        if (value < bestLength){
+        if (value < bestObj){
 
-            bestLength = value;
-            bestSolution = places;
+            bestObj = value;
+            bestSolution = factories;
 
-            std::cout << "Nombre d'itérations : "<< curIteration << " " << "Meilleure longueur : " << bestLength << " "<<std::endl;
-            std::cout<<"Taille de la solution : "<<places.size()<<std::endl;
-            std::cout<<"Solution (Emplacements) : "<<std::endl;
-            for (int i=0; i<int(places.size()); i++)
-                std::cout << places[i] << " ";
+            std::cout << "Nombre d'itérations : "<< curIteration << " " << "Meilleur Objectif : " << bestObj << " "<<std::endl;
+            std::cout<<"Taille de la solution : "<<factories.size()<<std::endl;
+            std::cout<<"Solution (Usines) : "<<std::endl;
+            for (int i=0; i<int(factories.size()); i++)
+                std::cout << factories[i] << " ";
 
             std::cout << std::endl;
         }

@@ -20,6 +20,7 @@ class ant{
         // liste des villes visitées / à visiter
         std::vector<int> visitedPlaces;
         std::vector<int> placesStillToAffect;
+        std::vector<int> affectedFactories;
 
         // compteur de longueur du chemin parcouru
         long tmpVisitedLength;

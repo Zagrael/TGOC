@@ -41,7 +41,8 @@ void ant::frame(){
 void ant::findNextSearchDestination(){
     switch(state){
         case NOTHING:{
-            visitedPlaces.push_back(0);
+            //visitedPlaces.push_back(0);
+            visitedPlaces.push_back(rand()%data.nbPlaces);
             std::vector<int>::iterator tmp = placesStillToAffect.begin();
             while (tmp != placesStillToAffect.end()){
                 if (*tmp == 0){
@@ -57,8 +58,6 @@ void ant::findNextSearchDestination(){
             currentDestination = dest;
             currentArcPos = 0;
             currentArcLength = data.distances[0][currentDestination];
-            cout<<"currentDestination : "<<currentDestination;
-            cout<<"currentArcLength : "<<currentArcLength<<endl;
             currentArcFlowSize = data.flows[0][currentDestination];
             currentArcCost = currentArcFlowSize*currentArcLength;
 
@@ -94,8 +93,6 @@ void ant::findNextSearchDestination(){
                 currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
                 currentArcFlowSize = data.flows[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
                 currentArcCost = currentArcFlowSize*currentArcLength;
-                cout<<"currentDestination : "<<currentDestination;
-                cout<<"currentArcLength : "<<currentArcLength<<endl;
                 currentArcPos = currentArcLength;
                 return;
             }
@@ -111,7 +108,35 @@ void ant::findNextSearchDestination(){
         }
         case RETURNING:{
             if (currentDestination == 0){
-                // retourné au nid avec succès
+                // on a trouvé une solution optimale = visitedPlaces
+                // on change cette solution pour avoir les usines en fonction des emplacements = affectedFactories
+
+                cout << "visitedPlaces :" << endl;
+                for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
+                    cout << *i << ' ';
+                }
+                cout << "\n";
+
+                int n = 0;
+                for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
+                    int m = 0;
+                    for (vector<int>::const_iterator j = visitedPlaces.begin(); j != visitedPlaces.end(); ++j) {
+                        if(visitedPlaces[*j]==n) {
+                            affectedFactories.push_back(m);
+                        }
+                        m++;
+                    }
+
+                    n++;
+                }
+
+                cout << "affectedPlaces :" << endl;
+                for (vector<int>::const_iterator i = affectedFactories.begin(); i != affectedFactories.end(); ++i) {
+                    cout << *i << ' ';
+                }
+                cout << "\n";
+
+                // retournée au nid avec succès
                 data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], cstVisitedLength);
 
                 // sauver le résultat, changer de fourmi
