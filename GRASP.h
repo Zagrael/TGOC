@@ -9,6 +9,7 @@
 #include "common.h"
 #include "QAP.h"
 #include <cstdlib>
+#include <iostream>
 
 class GRASP {
 
@@ -35,9 +36,11 @@ public:
      * Algorithm
      * */
     int *run(const float &);
-    const int *greedyProbability(int*);
-    const int *localSearch(const int*);
-    void updateBest(const int*);
+    const int *greedyProbability(int *);
+    float *computeProbabilities(int *, const int &, float *);
+    int choseProbability(float *);
+    const int *localSearch(const int *);
+    void updateBest(const int *);
 };
 
 

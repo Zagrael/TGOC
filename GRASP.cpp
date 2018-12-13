@@ -5,7 +5,6 @@
 #include "GRASP.h"
 
 GRASP::GRASP(const float &alpha, const int &n, const int F[][N_MAX], const int D[][N_MAX]) {
-
     this->alpha = alpha;
     this->n = n;
     for(int i = 0; i < n; i++) {
@@ -37,37 +36,11 @@ int *GRASP::run(const float &maxSec) {
 }
 
 const int *GRASP::greedyProbability(int* s) {
-    int best = 0;
-    int bestVal;
 
     s[0] = rand() % n + 1; // Return a number between 1 and n
-
-    // Look at each places
-    for(int j = 1; j < n; j++) {
-        bestVal = 1000000;
-        // Look at each factories
-        for (int i = 1; i <= n; i++) {
-            // Check if i is in the solution
-            bool isIn = false;
-            for (int q = 0; q < j; q++) {
-                if (s[q] == i) {
-                    isIn = true;
-                    break;
-                }
-            }
-            if (!isIn) {
-                // Compute added cost
-                int cost = 0;
-                for (int q = 0; q < j; q++) {
-                    cost += D[j][q] * (F[s[q] - 1][i - 1] + F[i - 1][s[q] - 1]);
-                }
-                if (cost < bestVal) {
-                    best = i;
-                    bestVal = cost;
-                }
-            }
-        }
-        s[j] = best;
+    float prob[N_MAX];
+    for(int i = 1; i < n; i++) {
+        s[i] = choseProbability(computeProbabilities(s, i, prob)) + 1;
     }
     return s;
 }
@@ -84,4 +57,78 @@ void GRASP::updateBest(const int *s) {
         }
         this->objectiveValue = obj;
     }
+}
+
+int GRASP::choseProbability(float *prob) {
+    float p = 0.0f;
+    float r = ((float) rand() / (RAND_MAX));
+
+    for(int i = 0; i < n; i++) {
+        p += prob[i];
+        if(r <= p) return i;
+    }
+    std::cout << p << std::endl;
+    return -1;
+}
+
+float *GRASP::computeProbabilities(int *s, const int &nS, float *prob) {
+    /*
+     * Restricted Candidates List
+     * */
+    int nRCL = 0;
+    int minCost = 1000000;
+    int maxCost = 0;
+
+    // Find min and max cost
+    int costs[N_MAX];
+    int cost;
+    for(int i = 0; i < n; i++) {
+        // Check if i is in the solution
+        bool isIn = false;
+        for(int q = 0; q < nS; q++) {
+            if (s[q] == i + 1) {
+                isIn = true;
+                break;
+            }
+        }
+        if(!isIn) {
+            // Compute added cost
+            cost = 0;
+            for(int q = 0; q < nS; q++)
+                cost += D[nS][q] * (F[s[q] - 1][i] + F[i][s[q] - 1]);
+            costs[i] = cost;
+            std::cout << "cost for " << i << " : " << cost << std::endl;
+            if(cost < minCost)
+                minCost = cost;
+            if(cost > maxCost)
+                maxCost = cost;
+        }
+    }
+
+    for(int i = 0; i < n; i++) {
+        // Check if i is in the solution
+        bool isIn = false;
+        for(int q = 0; q < nS; q++) {
+            if(s[q] == i + 1) {
+                isIn = true;
+                break;
+            }
+        }
+        // Check if i is in the RCL
+        if(!isIn && costs[i] <= minCost + alpha * (maxCost - minCost)) {
+            // Apply probability
+            prob[i] = 1.0f;
+            nRCL++;
+        } else
+            prob[i] = 0.0f;
+    }
+
+    // Divide every probabilities by nRCL
+    for(int i = 0; i < n; i++) {
+        prob[i] /= nRCL;
+    }
+
+    if(nRCL == 0) std::cout << "nRCL null" << std::endl;
+
+    return prob;
 }
