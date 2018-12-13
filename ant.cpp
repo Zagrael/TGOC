@@ -127,7 +127,7 @@ void ant::findNextSearchDestination(){
                     std::vector<int>::iterator tmp = visitedPlaces.begin();
                     while (tmp != visitedPlaces.end()){
                         if (visitedPlaces[*tmp] == n){
-                            affectedFactories.push_back(*tmp);
+                            affectedFactories.push_back((*tmp) + 1);
                             break;
                         }
                         tmp++;
@@ -136,12 +136,11 @@ void ant::findNextSearchDestination(){
                     n++;
                 }
 
-                //conversion en un tableau i+1
-                int objectiftab[N_MAX];
+                //conversion en un tableau
                 int tab = 0;
 
                 for (vector<int>::const_iterator i = affectedFactories.begin(); i != affectedFactories.end(); ++i) {
-                    objectiftab[tab] = *i + 1;
+                    objectiftab[tab] = *i;
                     tab++;
                 }
 
@@ -150,6 +149,9 @@ void ant::findNextSearchDestination(){
                         objectif += data.distances[i][j] * data.flows[objectiftab[i] - 1][objectiftab[j] - 1];
                     }
                 }
+
+
+
 
                 // retournée au nid avec succès
                 data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif);

@@ -6,6 +6,7 @@
 #define CHALLENGE_ANT_H
 
 #include <vector>
+#include "QAP.h"
 
 class problem;
 
@@ -21,6 +22,7 @@ class ant{
         std::vector<int> visitedPlaces;
         std::vector<int> placesStillToAffect;
         std::vector<int> affectedFactories;
+        int objectiftab[N_MAX];
 
         // compteur de longueur du chemin parcouru
         long tmpVisitedLength;
