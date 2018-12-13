@@ -6,13 +6,29 @@
 #define CHALLENGE_QAP_H
 
 #include <iostream>
+#include <string.h>
+
 
 const int N_MAX = 1000;
 
 class QAP {
 
 public:
-    static int computeObjectiveValue(const int&, int[], int[][N_MAX], int[][N_MAX]);
+
+    QAP(const int &n, int F[][N_MAX], int D[][N_MAX]);
+
+    virtual void run()=0;
+
+    int solution[N_MAX];
+
+protected:
+
+    int computeObjectiveValue(const int &n, int solution[]);
+
+    int F[N_MAX][N_MAX];
+    int D[N_MAX][N_MAX];
+    int n;
+
 };
 
 
