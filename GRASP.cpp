@@ -3,6 +3,7 @@
 //
 
 #include "GRASP.h"
+#include <iostream>
 
 GRASP::GRASP(const float &alpha, const int &n, const int F[][N_MAX], const int D[][N_MAX]) {
 
@@ -27,18 +28,50 @@ int GRASP::getObjectiveValue() const {
 int *GRASP::run(const float &maxSec) {
     clock_t t_init = clock();
 
+    int s[N_MAX];
     do {
-        updateBest(localSearch(greedyProbability()));
+        updateBest(localSearch(greedyProbability(s)));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxSec);
 
-    // TODO: Compute the objective value
+    this->objectiveValue = QAP::computeObjectiveValue(n, solution, F, D);
     return this->solution;
 }
 
-const int *GRASP::greedyProbability() {
-    int s[N_MAX];
+const int *GRASP::greedyProbability(int* s) {
+    int best = 0;
+    int bestVal;
+
     s[0] = rand() % n + 1; // Return a number between 1 and n
-    return nullptr;
+    std::cout << s[0] << std::endl;
+
+    // Look at each places
+    for(int j = 1; j < n; j++) {
+        bestVal = 1000000;
+        // Look at each factories
+        for (int i = 1; i <= n; i++) {
+            // Check if i is in the solution
+            bool isIn = false;
+            for (int q = 0; q < j; q++) {
+                if (s[q] == i) {
+                    isIn = true;
+                    break;
+                }
+            }
+            if (!isIn) {
+                // Compute added cost
+                int cost = 0;
+                for (int q = 0; q < j; q++) {
+                    cost += D[j][q] * (F[s[q] - 1][i - 1] + F[i - 1][s[q] - 1]);
+                }
+                if (cost < bestVal) {
+                    best = i;
+                    bestVal = cost;
+                }
+            }
+        }
+        s[j] = best;
+    }
+    return s;
 }
 
 const int *GRASP::localSearch(const int *s) {

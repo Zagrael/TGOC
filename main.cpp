@@ -2,8 +2,8 @@
 #include <fstream>
 #include <string>
 
-#include "GRASP.h"
 #include "common.h"
+#include "GRASP.h"
 
 using namespace std;
 
@@ -70,7 +70,7 @@ bool readSolution() {
 }
 
 int main() {
-    float maxTime = 60.0f;
+    float maxTime = 10.0f;
     cout << "Hello, World!" << endl;
 
     // Read inputs
@@ -94,15 +94,19 @@ int main() {
     float alpha = 0.2;
     GRASP grasp = GRASP(alpha, n, f, d);
     int* solution = grasp.run(maxTime);
+    cout << "Solution found with GRASP :";
+    for(int i = 0; i < n; i++) {
+        cout << " " << solution[i];
+    }
+    cout << endl <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
     // Read the solution
     if(!readSolution()) return -1;
-    cout << "n = " << n << endl;
-    cout << "Objective value : " << objectiveValue << endl;
     cout << "Optimal solution :";
     for(int i = 0; i < n; i++) {
         cout << " " << sol[i];
     }
+    cout << endl << "Objective value : " << objectiveValue << endl;
 
     return 0;
 }

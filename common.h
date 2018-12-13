@@ -5,6 +5,6 @@
 #ifndef CHALLENGE_COMMON_H
 #define CHALLENGE_COMMON_H
 
-extern const int N_MAX = 1000;
+const int N_MAX = 200;
 
 #endif //CHALLENGE_COMMON_H
