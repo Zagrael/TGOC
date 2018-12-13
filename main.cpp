@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Tabou.h"
 
 using namespace std;
 
@@ -68,7 +69,7 @@ bool readSolution() {
 }
 
 int main() {
-    cout << "Hello, World!" << endl;
+    /*cout << "Hello, World!" << endl;
 
     // Read inputs
     if(!readData()) return -1;
@@ -94,7 +95,11 @@ int main() {
     cout << "Optimal solution :";
     for(int i = 0; i < n; i++) {
         cout << " " << sol[i];
-    }
+    }*/
+
+    Tabou tabou(NULL, NULL, 10);
+
+    //cout << tabou.cost(2,3);
 
     return 0;
 }
