@@ -38,7 +38,7 @@ void antSystem::run(int n){
                 // La fourmi a trouvé une solution
                 // On notifie la solution, on crée une nouvelle fourmi et on supprime l'ancienne
                 if (e.state == antException::TO_REGISTER) {
-                    notifySolution(e.a->tmpVisitedLength, e.a->visitedPlaces);
+                    notifySolution(e.a->objectif, e.a->affectedFactories);
                 }
 
                 if(bestObj <= data.optimalLength)
@@ -57,7 +57,7 @@ void antSystem::run(int n){
             data.evaporate();
 
         if (curIteration%50==0)
-            std::cout << "Longueur actuelle : " << bestObj << std::endl;
+            std::cout << "Meilleur objectif : " << bestObj << std::endl;
     }
 }
 

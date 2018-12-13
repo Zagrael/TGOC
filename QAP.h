@@ -7,12 +7,15 @@
 
 #include <iostream>
 
+using namespace std ;
+
 const int N_MAX = 1000;
 
 class QAP {
 
 public:
     static int computeObjectiveValue(const int&, int[], int[][N_MAX], int[][N_MAX]);
+    static int computeObjectiveValueVector(int, vector<int>, int[][N_MAX], int[][N_MAX]);
 };
 
 

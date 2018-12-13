@@ -8,7 +8,12 @@
 #include "antexception.h"
 #include <algorithm>
 
+#include "QAP.h"
+
 using namespace std ;
+
+extern const int d[N_MAX][N_MAX];
+extern const int f[N_MAX][N_MAX];
 
 ant::ant(problem& d):data(d){
     tmpVisitedLength = 0;
@@ -21,7 +26,6 @@ ant::ant(problem& d):data(d){
     for (int i=0; i<data.nbPlaces; i++)
         placesStillToAffect.push_back(i);
 }
-
 
 void ant::frame(){
     switch(state){
@@ -87,7 +91,6 @@ void ant::findNextSearchDestination(){
                 // on revient vers le nid
                 tmpVisitedLength += data.distances[currentDestination][0];
                 flwVisitedLength += data.flows[currentDestination][0];
-                objectif += tmpVisitedLength*flwVisitedLength;
 
                 state = RETURNING;
                 currentOrigin =  int(visitedPlaces.size())-1;
@@ -113,24 +116,11 @@ void ant::findNextSearchDestination(){
                 // on a trouvé une solution optimale = visitedPlaces
                 // on change cette solution pour avoir les usines en fonction des emplacements = affectedFactories
 
-                cout << "visitedPlaces :" << endl;
+                /*cout << "visitedPlaces :" << endl;
                 for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
                     cout << *i << ' ';
                 }
-                cout << "\n";
-
-                /*int n = 0;
-                for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
-                    int m = 0;
-                    for (vector<int>::const_iterator j = visitedPlaces.begin(); j != visitedPlaces.end(); ++j) {
-                        if(visitedPlaces[*j]==n) {
-                            affectedFactories.push_back(m);
-                        }
-                        m++;
-                    }
-
-                    n++;
-                }*/
+                cout << "\n";*/
 
                 int n = 0;
                 for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
@@ -146,13 +136,20 @@ void ant::findNextSearchDestination(){
                     n++;
                 }
 
-                cout << "affectedPlaces :" << endl;
-                for (vector<int>::const_iterator i = affectedFactories.begin(); i != affectedFactories.end(); ++i) {
-                    cout << *i << ' ';
-                }
-                cout << "\n";
+                //conversion en un tableau i+1
+                int objectiftab[N_MAX];
+                int tab = 0;
 
-                // calcul de l'objectif de la solution trouvée (affectedFactories)
+                for (vector<int>::const_iterator i = affectedFactories.begin(); i != affectedFactories.end(); ++i) {
+                    objectiftab[tab] = *i + 1;
+                    tab++;
+                }
+
+                for(int i = 0; i < n; i++) {
+                    for(int j = 0; j < n; j++) {
+                        objectif += data.distances[i][j] * data.flows[objectiftab[i] - 1][objectiftab[j] - 1];
+                    }
+                }
 
                 // retournée au nid avec succès
                 data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif);

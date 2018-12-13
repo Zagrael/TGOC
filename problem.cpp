@@ -37,6 +37,7 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
 
     in.close();
 
+
     /*for (int i = 0; i<nbPlaces; i++){
         distances[i][i] = 0;
         for (int j = i+1; j<nbPlaces; j++)
