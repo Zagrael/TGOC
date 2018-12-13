@@ -113,13 +113,13 @@ void ant::findNextSearchDestination(){
                 // on a trouvé une solution optimale = visitedPlaces
                 // on change cette solution pour avoir les usines en fonction des emplacements = affectedFactories
 
-                /*cout << "visitedPlaces :" << endl;
+                cout << "visitedPlaces :" << endl;
                 for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
                     cout << *i << ' ';
                 }
                 cout << "\n";
 
-                int n = 0;
+                /*int n = 0;
                 for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
                     int m = 0;
                     for (vector<int>::const_iterator j = visitedPlaces.begin(); j != visitedPlaces.end(); ++j) {
@@ -130,6 +130,20 @@ void ant::findNextSearchDestination(){
                     }
 
                     n++;
+                }*/
+
+                int n = 0;
+                for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
+                    std::vector<int>::iterator tmp = visitedPlaces.begin();
+                    while (tmp != visitedPlaces.end()){
+                        if (visitedPlaces[*tmp] == n){
+                            affectedFactories.push_back(*tmp);
+                            break;
+                        }
+                        tmp++;
+                    }
+
+                    n++;
                 }
 
                 cout << "affectedPlaces :" << endl;
@@ -137,7 +151,7 @@ void ant::findNextSearchDestination(){
                     cout << *i << ' ';
                 }
                 cout << "\n";
-                 */
+
 
                 // retournée au nid avec succès
                 data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], cstVisitedLength);
