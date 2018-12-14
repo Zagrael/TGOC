@@ -3,4 +3,4 @@ project(Challenge)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Challenge main.cpp GRASP.cpp GRASP.h common.h QAP.cpp QAP.h)
+add_executable(Challenge main.cpp GRASP.cpp GRASP.h common.h QAP.cpp QAP.h SimulatedAnnealing.cpp SimulatedAnnealing.h)

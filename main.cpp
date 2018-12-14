@@ -101,15 +101,15 @@ int main() {
     cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solution) ? "True" : "False") << endl;
     cout <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
-    // Apply random solution
-    int randSol[N_MAX];
-    QAP::solveRandomly(n, f, d, 60, randSol);
-    cout << "Solution found randomly :";
-    for(int i = 0; i < n; i++) {
-        cout << " " << randSol[i];
-    }
-    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, randSol) ? "True" : "False") << endl;
-    cout <<  "Objective found randomly : " << QAP::computeObjectiveValue(n, randSol, f, d) << endl;
+//    // Apply random solution
+//    int randSol[N_MAX];
+//    QAP::solveRandomly(n, f, d, 60, randSol);
+//    cout << "Solution found randomly :";
+//    for(int i = 0; i < n; i++) {
+//        cout << " " << randSol[i];
+//    }
+//    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, randSol) ? "True" : "False") << endl;
+//    cout <<  "Objective found randomly : " << QAP::computeObjectiveValue(n, randSol, f, d) << endl;
 
     // Read the solution
     if(!readSolution()) return -1;
