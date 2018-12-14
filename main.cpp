@@ -4,11 +4,12 @@
 
 #include "common.h"
 #include "GRASP.h"
+#include "SimulatedAnnealing.h"
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/nug30.dat";
-const char* FILE_SOLUTION = "../instances/nug30.sln";
+const char* FILE_DATA = "../instances/tai15a.dat";
+const char* FILE_SOLUTION = "../instances/tai15a.sln";
 
 int n;
 int f[N_MAX][N_MAX];
@@ -93,12 +94,12 @@ int main() {
     // Apply GRASP algorithm
     float alpha = 0.2;
     GRASP grasp = GRASP(alpha, n, f, d);
-    int* solution = grasp.run(maxTime);
+    int* solutionGRASP = grasp.run(maxTime);
     cout << "Solution found with GRASP :";
     for(int i = 0; i < n; i++) {
-        cout << " " << solution[i];
+        cout << " " << solutionGRASP[i];
     }
-    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solution) ? "True" : "False") << endl;
+    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionGRASP) ? "True" : "False") << endl;
     cout <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
 //    // Apply random solution
@@ -110,6 +111,21 @@ int main() {
 //    }
 //    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, randSol) ? "True" : "False") << endl;
 //    cout <<  "Objective found randomly : " << QAP::computeObjectiveValue(n, randSol, f, d) << endl;
+
+    // Apply Simulated Annealing
+    int maxTimeSA = 30;
+    float t = 10;
+    float alph = 0.8;
+    int it = 100;
+    SimulatedAnnealing sa = SimulatedAnnealing(t, alph, n, f, d, it);
+    sa.setSolution(solutionGRASP);
+    int* solutionSA = sa.run(maxTimeSA);
+    cout << "Solution found with Simulated Annealing :";
+    for(int i = 0; i < n; i++) {
+        cout << " " << solutionSA[i];
+    }
+    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionSA) ? "True" : "False") << endl;
+    cout <<  "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
 
     // Read the solution
     if(!readSolution()) return -1;
