@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/tai15a.dat";
-const char* FILE_SOLUTION = "../instances/tai15a.sln";
+const char* FILE_DATA = "../instances/nug12.dat";
+const char* FILE_SOLUTION = "../instances/nug12.sln";
 
 int n;
 int f[N_MAX][N_MAX];
@@ -71,8 +71,6 @@ bool readSolution() {
 }
 
 int main() {
-    float maxTime = 10.0f;
-    cout << "Hello, World!" << endl;
 
     // Read inputs
     if(!readData()) return -1;
@@ -91,7 +89,10 @@ int main() {
         cout << endl;
     }
 
-    // Apply GRASP algorithm
+    /*
+     * Apply GRASP algorithm
+     * */
+    float maxTime = 10.0f;
     float alpha = 0.2;
     GRASP grasp = GRASP(alpha, n, f, d);
     int* solutionGRASP = grasp.run(maxTime);
@@ -102,7 +103,9 @@ int main() {
     cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionGRASP) ? "YES" : "NO") << endl;
     cout <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
-//    // Apply random solution
+//    /*
+//     * Apply random solution
+//     * */
 //    int randSol[N_MAX];
 //    QAP::solveRandomly(n, f, d, 60, randSol);
 //    cout << "Solution found randomly :";
@@ -112,20 +115,22 @@ int main() {
 //    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, randSol) ? "YES" : "NO") << endl;
 //    cout <<  "Objective found randomly : " << QAP::computeObjectiveValue(n, randSol, f, d) << endl;
 
-    // Apply Simulated Annealing
-    float maxTimeSA = 60.0f;
-    float t = 10000;
-    float alph = 0.8;
-    int it = 10000;
-    SimulatedAnnealing sa = SimulatedAnnealing(t, alph, n, f, d, it);
-    sa.setSolution(solutionGRASP);
-    int* solutionSA = sa.run(maxTimeSA);
-    cout << "Solution found with Simulated Annealing :";
-    for(int i = 0; i < n; i++) {
-        cout << " " << solutionSA[i];
-    }
-    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionSA) ? "YES" : "NO") << endl;
-    cout <<  "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
+    /*
+     * Apply Simulated Annealing
+     * */
+//    float maxTimeSA = 60.0f;
+//    float t = 10000;
+//    float alph = 0.8;
+//    int it = 10000;
+//    SimulatedAnnealing sa = SimulatedAnnealing(t, alph, n, f, d, it);
+//    sa.setSolution(solutionGRASP);
+//    int* solutionSA = sa.run(maxTimeSA);
+//    cout << "Solution found with Simulated Annealing :";
+//    for(int i = 0; i < n; i++) {
+//        cout << " " << solutionSA[i];
+//    }
+//    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionSA) ? "YES" : "NO") << endl;
+//    cout <<  "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
 
     // Read the solution
     if(!readSolution()) return -1;
