@@ -1,3 +1,5 @@
+#include <random>
+
 #include <cmath>
 
 //
@@ -16,7 +18,10 @@ SimulatedAnnealing::SimulatedAnnealing(float t, float alpha, int n, int F[][N_MA
             this->F[i][j] = F[i][j];
             this->D[i][j] = D[i][j];
         }
+        this->solution[i] = i + 1;
     }
+    std::shuffle(&solution[0], &solution[n], std::mt19937(std::random_device()()));
+    this->objectiveValue = QAP::computeObjectiveValue(n, solution, F, D);
 }
 
 int SimulatedAnnealing::getObjectiveValue() const {
@@ -42,20 +47,22 @@ int *SimulatedAnnealing::run(const float &maxSec) {
                 v[i][i + 1] = s[i];
 
                 p[i] = computeProb(v[i]);
+//                std::cout << "p[" << i << "] : " << p[i] << std::endl;
             }
             int q = choseRandom(p);
             if(q != -1) {
                 for(int i = 0; i < n; i++) {
                     s[i] = v[q][i];
                 }
-                std::cout << v[q][0] << std::endl;
-                std::cout << s[0] << std::endl;
+//                std::cout << v[q][0] << std::endl;
+//                std::cout << s[0] << std::endl;
                 updateBest(s);
-            } else
-                std::cout << "q = -1" << std::endl;
+            } else {
+//                std::cout << "q = -1" << std::endl;
+            }
         }
         updateTemperature();
-    } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxSec && t > 0);
+    } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxSec && t >= 1);
 
     this->objectiveValue = QAP::computeObjectiveValue(n, solution, F, D);
     return this->solution;
@@ -77,7 +84,9 @@ void SimulatedAnnealing::findNeighbors(int s[], int v[][N_MAX]) {
 
 float SimulatedAnnealing::computeProb(int *v) {
     int obj = QAP::computeObjectiveValue(n, v, F, D);
-    std::cout << obj << std::endl;
+//    std::cout << obj << std::endl;
+//    std::cout << objectiveValue << std::endl;
+//    std::cout << std::exp((objectiveValue - obj) / t) << std::endl;
     return (obj <= objectiveValue) ?  1 : std::exp((objectiveValue - obj) / t);
 }
 
@@ -100,7 +109,7 @@ int SimulatedAnnealing::choseRandom(float p[]) {
         den += p[i];
     }
     for(int i = 0; i < n; i++) {
-        pc += p[i] / den;
+        den == 0 ? pc += p[i] : pc += p[i] / den;
         if(r <= pc) return i;
     }
     return -1;

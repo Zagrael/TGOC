@@ -8,6 +8,7 @@
 #include <time.h>
 #include <cmath>
 #include <iterator>
+#include <algorithm>
 #include <iostream>
 #include "common.h"
 #include "QAP.h"

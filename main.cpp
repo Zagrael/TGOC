@@ -99,7 +99,7 @@ int main() {
     for(int i = 0; i < n; i++) {
         cout << " " << solutionGRASP[i];
     }
-    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionGRASP) ? "True" : "False") << endl;
+    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionGRASP) ? "YES" : "NO") << endl;
     cout <<  "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
 //    // Apply random solution
@@ -109,14 +109,14 @@ int main() {
 //    for(int i = 0; i < n; i++) {
 //        cout << " " << randSol[i];
 //    }
-//    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, randSol) ? "True" : "False") << endl;
+//    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, randSol) ? "YES" : "NO") << endl;
 //    cout <<  "Objective found randomly : " << QAP::computeObjectiveValue(n, randSol, f, d) << endl;
 
     // Apply Simulated Annealing
-    int maxTimeSA = 30;
-    float t = 10;
+    float maxTimeSA = 60.0f;
+    float t = 10000;
     float alph = 0.8;
-    int it = 100;
+    int it = 10000;
     SimulatedAnnealing sa = SimulatedAnnealing(t, alph, n, f, d, it);
     sa.setSolution(solutionGRASP);
     int* solutionSA = sa.run(maxTimeSA);
@@ -124,7 +124,7 @@ int main() {
     for(int i = 0; i < n; i++) {
         cout << " " << solutionSA[i];
     }
-    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionSA) ? "True" : "False") << endl;
+    cout << endl << "Admissible solution ? " << (QAP::isAdmissibleSolution(n, solutionSA) ? "YES" : "NO") << endl;
     cout <<  "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
 
     // Read the solution
