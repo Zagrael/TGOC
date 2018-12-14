@@ -7,6 +7,8 @@
 
 
 #include <iostream>
+#include <time.h>
+#include <algorithm>
 #include "common.h"
 
 class QAP {
@@ -14,6 +16,7 @@ class QAP {
 public:
     static int computeObjectiveValue(const int&, const int[], int[][N_MAX], int[][N_MAX]);
     static bool isAdmissibleSolution(const int&, const int[]);
+    static int* solveRandomly(const int &, int [][N_MAX], int [][N_MAX], const int &, int *);
 };
 
 
