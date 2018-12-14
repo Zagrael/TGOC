@@ -150,9 +150,6 @@ void ant::findNextSearchDestination(){
                     }
                 }
 
-
-
-
                 // retournée au nid avec succès
                 data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif);
 
