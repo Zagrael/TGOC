@@ -31,14 +31,14 @@ bool readData() {
     // Distances matrix
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            in >> f[i][j];
+            in >> d[i][j];
         }
     }
 
     // Flow matrix
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            in >> d[i][j];
+            in >> f[i][j];
         }
     }
 
