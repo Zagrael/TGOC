@@ -14,25 +14,23 @@ const int N_MAX = 1000;
 class QAP {
 
     std::string dataName;
-    int *solution;
-    int objectiveValue;
 
 protected:
     int n;
     int **F;
     int **D;
+    int *solution;
+    int objectiveValue;
 
-    int computeObjectiveValue(const int &n, int solution[]);
+    int computeObjectiveValue(const int &n, const int *solution);
 
 public:
 
     // Constructors
-    explicit QAP(const std::string &fileName);
+    explicit QAP(const std::string &dataName);
 
     // Destructor
     virtual ~QAP();
-
-//    virtual void run() = 0;
 
     // Getters
     int *getSolution() const;
@@ -42,7 +40,9 @@ public:
     int **getDistanceMatrix() const;
 
     // Methods
+    virtual int *run(const float &maxTimeSec) = 0; // Start an algorithm
     void displayOptimalSolution() const;
+    static bool isAdmissible(const int &n, const int *s);
 };
 
 

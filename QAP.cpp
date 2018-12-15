@@ -7,9 +7,8 @@
 /*
  * Constructors
  * */
-QAP::QAP(const std::string &dataName) {
+QAP::QAP(const std::string &dataName): dataName(dataName) {
 
-    this->dataName = dataName;
     std::string fileName = "../instances/" + dataName + ".dat";
     std::ifstream in(fileName);
 
@@ -39,6 +38,13 @@ QAP::QAP(const std::string &dataName) {
     }
 
     in.close();
+
+    // Initialize the solution
+    solution = new int[n];
+    for(int i = 0; i < n; i++) {
+        solution[i] = i + 1;
+    }
+    objectiveValue = computeObjectiveValue(n, solution);
 }
 
 /*
@@ -55,7 +61,7 @@ QAP::~QAP() {
     delete[] solution;
 }
 
-int QAP::computeObjectiveValue(const int &n, int solution[]) {
+int QAP::computeObjectiveValue(const int &n, const int *solution) {
     int value = 0;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
@@ -63,6 +69,17 @@ int QAP::computeObjectiveValue(const int &n, int solution[]) {
         }
     }
     return value;
+}
+
+bool QAP::isAdmissible(const int &n, const int *s) {
+    for(int i = 0; i < n; i++) {
+        if (s[i] < 1 || s[i] > n)
+            return false;
+        for (int j = 0; j < i; j++)
+            if (s[i] == s[j])
+                return false;
+    }
+    return true;
 }
 
 void QAP::displayOptimalSolution() const {
