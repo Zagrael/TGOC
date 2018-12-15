@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
 
-    string dataName = "nug30";
+    string dataName = "tai15b";
 
     // Uncomment these lines before using the executable !
     char rep;

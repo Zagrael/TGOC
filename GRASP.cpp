@@ -40,7 +40,7 @@ const int *GRASP::greedyProbability(int *s) {
 float *GRASP::computeProbabilities(int *s, const int &nS, float *p) {
 
     int nRCL = 0;
-    int minCost = 1000000;
+    int minCost = -1;
     int maxCost = -1;
 
     // Find min and max costs
@@ -62,9 +62,9 @@ float *GRASP::computeProbabilities(int *s, const int &nS, float *p) {
             for(int q = 0; q < nS; q++)
                 cost += D[nS][q] * (F[s[q] - 1][i] + F[i][s[q] - 1]);
             costs[i] = cost;
-            if(cost < minCost)
+            if(cost < minCost || minCost == -1)
                 minCost = cost;
-            if(cost > maxCost)
+            if(cost > maxCost || maxCost == -1)
                 maxCost = cost;
         }
     }

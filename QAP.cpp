@@ -61,11 +61,11 @@ QAP::~QAP() {
     delete[] solution;
 }
 
-int QAP::computeObjectiveValue(const int &n, const int *solution) {
+int QAP::computeObjectiveValue(const int &n, const int *s) {
     int value = 0;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            value += D[i][j] * F[solution[i] - 1][solution[j] - 1];
+            value += D[i][j] * F[s[i] - 1][s[j] - 1];
         }
     }
     return value;
