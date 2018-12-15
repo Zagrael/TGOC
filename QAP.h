@@ -27,7 +27,7 @@ protected:
 public:
 
     // Constructors
-    explicit QAP(const std::string &dataName);
+    explicit QAP(std::string &dataName);
 
     // Destructor
     virtual ~QAP();

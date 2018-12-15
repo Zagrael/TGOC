@@ -4,9 +4,10 @@
 
 #include "GRASP.h"
 
-GRASP::GRASP(const std::string &dataName, float alpha) : QAP(dataName), alpha(alpha) {}
+GRASP::GRASP(std::string &dataName, float alpha) : QAP(dataName), alpha(alpha) {}
 
 int *GRASP::run(const float &maxTimeSec) {
+    std::cout << "Running GRASP..." << std::endl;
     clock_t t_init = clock();
 
     int *s = new int[n];
@@ -14,6 +15,7 @@ int *GRASP::run(const float &maxTimeSec) {
         updateBest(localSearch(greedyProbability(s)));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
+    std::cout << "End of GRASP !" << std::endl;
     objectiveValue = computeObjectiveValue(n, solution);
     delete[] s;
     return solution;

@@ -7,7 +7,7 @@
 /*
  * Constructors
  * */
-QAP::QAP(const std::string &dataName): dataName(dataName) {
+QAP::QAP(std::string &dataName): dataName(dataName) {
 
     std::string fileName = "../instances/" + dataName + ".dat";
     std::ifstream in(fileName);

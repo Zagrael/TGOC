@@ -14,7 +14,7 @@ class GRASP : public QAP {
 
 public:
     // Constructors
-    GRASP(const std::string &dataName, float alpha);
+    GRASP(std::string &dataName, float alpha);
 
     // Methods
     int *run(const float &maxTimeSec) override;
