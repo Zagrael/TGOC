@@ -14,6 +14,8 @@ int *GRASP::run(const float &maxTimeSec) {
     int iter = 0;
     do {
         iter++;
+//        std::cout << "Iteration " << iter << std::endl;
+//        std::cout << "Elapsed time : " << (float)(clock() - t_init) / CLOCKS_PER_SEC << std::endl;
         updateBest(localSearch(greedyProbability(s)));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
