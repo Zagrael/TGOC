@@ -46,17 +46,17 @@ float *GRASP::computeProbabilities(int *s, const int &nS, float *p) {
     // Find min and max costs
     int *costs = new int[n];
     int cost;
-    bool isIn;
+    auto *isIn = new bool[n];
     for(int i = 0; i < n; i++) {
         // Check if i is in the solution
-        isIn = false;
+        isIn[i] = false;
         for(int q = 0; q < nS; q++) {
             if (s[q] == i + 1) {
-                isIn = true;
+                isIn[i] = true;
                 break;
             }
         }
-        if(!isIn) {
+        if(!isIn[i]) {
             // Compute added cost
             cost = 0;
             for(int q = 0; q < nS; q++)
@@ -71,16 +71,8 @@ float *GRASP::computeProbabilities(int *s, const int &nS, float *p) {
 
     // Fill the Restricted Candidates List with their probability
     for(int i = 0; i < n; i++) {
-        // Check if i is in the solution
-        isIn = false;
-        for(int q = 0; q < nS; q++) {
-            if(s[q] == i + 1) {
-                isIn = true;
-                break;
-            }
-        }
         // Check if i is in the RCL
-        if(!isIn && costs[i] <= minCost + alpha * (maxCost - minCost)) {
+        if(!isIn[i] && costs[i] <= minCost + alpha * (maxCost - minCost)) {
             // Apply probability
             p[i] = 1.0f;
             nRCL++;
