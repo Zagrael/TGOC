@@ -11,17 +11,19 @@ int *GRASP::run(const float &maxTimeSec) {
     clock_t t_init = clock();
 
     int *s = new int[n];
+    int iter = 0;
     do {
+        iter++;
         updateBest(localSearch(greedyProbability(s)));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
-    std::cout << "End of GRASP !" << std::endl;
+    std::cout << "End of GRASP (" << iter << " iterations) !" << std::endl;
     objectiveValue = computeObjectiveValue(n, solution);
     delete[] s;
     return solution;
 }
 
-const int *GRASP::greedyProbability(int *s) {
+int *GRASP::greedyProbability(int *s) {
 
     s[0] = rand() % n + 1;
     auto *prob = new float[n];
@@ -104,7 +106,7 @@ int GRASP::choseProbability(float *p) {
     throw "Error in GRASP::choseProbability(p) : Could not chose any probability !";
 }
 
-const int *GRASP::localSearch(const int *s) {
+int *GRASP::localSearch(int *s) {
 
     int lastBestNeighbor = -1;
     int bestNeighbor = -1;
@@ -112,10 +114,8 @@ const int *GRASP::localSearch(const int *s) {
     int val;
 
     bool locked = false;
-    int *current = new int[n];
     auto last = new int[n];
     for(int i = 0; i < n; i++) {
-        current[i] = s[i];
         last[i] = s[i];
     }
 
@@ -125,10 +125,10 @@ const int *GRASP::localSearch(const int *s) {
         // Find neighbors
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n; j++) {
-                v[j] = current[j];
+                v[j] = s[j];
             }
-            v[i] = current[i + 1];
-            v[i + 1] = current[i];
+            v[i] = s[i + 1];
+            v[i + 1] = s[i];
 
             // Test neighbor
             val = computeObjectiveValue(n, v);
@@ -138,11 +138,11 @@ const int *GRASP::localSearch(const int *s) {
             }
         }
 
-        if(bestVal <= computeObjectiveValue(n, current) && (!equals(current, last, n) || lastBestNeighbor == -1)) {
+        if(bestVal <= computeObjectiveValue(n, s) && (!equals(s, last, n) || lastBestNeighbor == -1)) {
             // Update current
-            temp = current[bestNeighbor];
-            current[bestNeighbor] = current[bestNeighbor + 1];
-            current[bestNeighbor + 1] = temp;
+            temp = s[bestNeighbor];
+            s[bestNeighbor] = s[bestNeighbor + 1];
+            s[bestNeighbor + 1] = temp;
 
             // Update last
             if(lastBestNeighbor != -1) {
@@ -157,10 +157,10 @@ const int *GRASP::localSearch(const int *s) {
 
     } while(!locked);
 
-    return current;
+    return s;
 }
 
-void GRASP::updateBest(const int *s) {
+void GRASP::updateBest(int *s) {
     int obj = computeObjectiveValue(n, s);
     if(isAdmissible(n,s) && obj < objectiveValue) {
         for(int i = 0; i < n; i++) {

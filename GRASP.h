@@ -18,11 +18,11 @@ public:
 
     // Methods
     int *run(const float &maxTimeSec) override;
-    const int *greedyProbability(int *s);
+    int *greedyProbability(int *s);
     float *computeProbabilities(int *s, const int &nS, float *p);
     int choseProbability(float *p);
-    const int *localSearch(const int *s);
-    void updateBest(const int *s);
+    int *localSearch(int *s);
+    void updateBest(int *s);
 };
 
 
