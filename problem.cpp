@@ -13,7 +13,7 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
           pheromones(nbPlaces, std::vector<float>(nbPlaces, borneMin)),
           flows(nbPlaces, std::vector<int>(nbPlaces, 0))
 {
-    const char* FILE_DATA = "../instances/tai15a.dat";
+    const char* FILE_DATA = "../instances/nug30.dat";
 
     ifstream in(FILE_DATA);
 
@@ -52,7 +52,8 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
 }
 
 void problem::setPheromones(int i, int j, int obj){
-    float ph = 100.f*optimalLength / (obj);
+    float ph = 100.f*optimalLength / (obj+1-optimalLength);
+    //float ph = 100.f*optimalLength / (obj);
 
     pheromones[i][j] += ph;
 
