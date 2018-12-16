@@ -134,3 +134,9 @@ int **QAP::getFlowMatrix() const {
 int **QAP::getDistanceMatrix() const {
     return D;
 }
+
+bool QAP::equals(int *s1, int *s2, int n) {
+    for(int i = 0; i < n; i++)
+        if(s1[i] != s2[i]) return true;
+    return false;
+}

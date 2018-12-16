@@ -105,7 +105,59 @@ int GRASP::choseProbability(float *p) {
 }
 
 const int *GRASP::localSearch(const int *s) {
-    return s;
+
+    int lastBestNeighbor = -1;
+    int bestNeighbor = -1;
+    int bestVal = -1;
+    int val;
+
+    bool locked = false;
+    int *current = new int[n];
+    auto last = new int[n];
+    for(int i = 0; i < n; i++) {
+        current[i] = s[i];
+        last[i] = s[i];
+    }
+
+    int temp;
+    auto *v = new int[n];
+    do {
+        // Find neighbors
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n; j++) {
+                v[j] = current[j];
+            }
+            v[i] = current[i + 1];
+            v[i + 1] = current[i];
+
+            // Test neighbor
+            val = computeObjectiveValue(n, v);
+            if (bestVal == -1 || val < bestVal) {
+                bestNeighbor = i;
+                bestVal = val;
+            }
+        }
+
+        if(bestVal <= computeObjectiveValue(n, current) && (!equals(current, last, n) || lastBestNeighbor == -1)) {
+            // Update current
+            temp = current[bestNeighbor];
+            current[bestNeighbor] = current[bestNeighbor + 1];
+            current[bestNeighbor + 1] = temp;
+
+            // Update last
+            if(lastBestNeighbor != -1) {
+                temp = last[lastBestNeighbor];
+                last[lastBestNeighbor] = last[lastBestNeighbor + 1];
+                last[lastBestNeighbor + 1] = temp;
+            }
+            lastBestNeighbor = bestNeighbor;
+        } else {
+            locked = true;
+        }
+
+    } while(!locked);
+
+    return current;
 }
 
 void GRASP::updateBest(const int *s) {

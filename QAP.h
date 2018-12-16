@@ -43,6 +43,7 @@ public:
     virtual int *run(const float &maxTimeSec) = 0; // Start an algorithm
     void displayOptimalSolution() const;
     static bool isAdmissible(const int &n, const int *s);
+    bool equals(int *s1, int *s2, int n);
 };
 
 
