@@ -8,7 +8,7 @@ using namespace std;
 const char* FILE_DATA = "../instances/nug12.dat";
 const char* FILE_SOLUTION = "../instances/nug12.sln";
 
-const int N_MAX = 1000;
+//const int N_MAX = 1000;
 int n;
 int f[N_MAX][N_MAX];
 int d[N_MAX][N_MAX];
@@ -68,6 +68,16 @@ bool readSolution() {
     return true;
 }
 
+int computeObjectiveValue(const int &n, int solution[]) {
+    int value = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            value += d[i][j] * f[solution[i] - 1][solution[j] - 1];
+        }
+    }
+    return value;
+}
+
 int main() {
     /*cout << "Hello, World!" << endl;
 
@@ -96,10 +106,13 @@ int main() {
     for(int i = 0; i < n; i++) {
         cout << " " << sol[i];
     }*/
+    cout << "Hello, World!" << endl;
 
-    Tabou tabou(NULL, NULL, 10);
+    readData();
+    readSolution();
 
-    //cout << tabou.cost(2,3);
+    Tabou tabou(n, f, d, 100000 ,100000);
+    //int retour=tabou.run(sol);
 
     return 0;
 }

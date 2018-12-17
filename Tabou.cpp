@@ -1,104 +1,134 @@
+
 //
 // Created by arnaud on 11/12/18.
 //
 
 #include "Tabou.h"
-#include <iostream>
-#include <fstream>
-#include <string.h>
-#include <queue>
-#include <vector>
-#include <list>
 
-using namespace std;
+Tabou::Tabou(const int &n, int F[][N_MAX], int D[][N_MAX], int time, int tabouSize):QAP(n, F, D){
+    this->time=time;
+    this->tabouSize=tabouSize;
+}
+
+int Tabou::computeObjectiveValue(vector<int> solution) {
+
+    int value = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+
+            value += D[i][j] * F[solution[i] - 1][solution[j] - 1];
+
+        }
+    }
+    return value;
+}
+
+void Tabou::printVector(vector<int> v){
+    vector<int>::iterator it;
+    for(it=v.begin(); it!=v.end();it++){
+        printf("%d, ",*it);
+    }
+    printf("%s: %d\n","cost",computeObjectiveValue(v));
+}
+
+bool Tabou:: continu(){
+    /*if(time==0){
+        return false;
+    }else{
+        time=time-1;
+        return true;
+    }*/
+    return true;
+
+}
 
 
-int stopAfter=1000;
+bool Tabou:: isInTabou(list<vector<int>> tabou, vector<int> sol){
 
-void getNeighbors(vector<vector<int >> &neighbors, vector<int> &sol){
-    neighbors.clear();
+    list<vector<int>>:: iterator it;
 
-    for(int j=0;j<sol.size(); j++){
-        vector<int> neighbor(sol.size());
-        for(int i=0;i<sol.size()-1; i++){
+    for(it=tabou.begin();it!=tabou.end();it++){
+        if(*it==sol){
+            return true;
+        }
+    }
+    return false;
+}
+
+vector<int> Tabou:: bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
+    vector<int> bestNeighbor(n);
+    vector<int> currentNeighbor(n);
+
+    int bestCost=std::numeric_limits<int>::max();
+    int currentCost=std::numeric_limits<int>::max();
+
+    for(int i=0;i<n-1;i++){//pour chaque voisin
+        for(int j=0;j<n;j++){//on construit le voisin
 
             if(i==j){
-                neighbor[i]=sol[i+1];
-                neighbor[i+1]=sol[i];
-                i++;
+                currentNeighbor[j]=sol[j+1];
+                currentNeighbor[j+1]=sol[j];
+                j++;
             }else{
-                neighbor[i]=sol[i];
+                currentNeighbor[j]=sol[j];
             }
         }
-        neighbors.push_back(neighbor);
-    }
 
-}
+        if(not isInTabou(tabou, currentNeighbor)){
+            currentCost=computeObjectiveValue(currentNeighbor);
 
-void initSol(vector<int> &sol, int minValue, int maxValue){
-    sol.clear();
-    //??Commence a 1 ou a 0
-    for(int i=0; i<sol.size();i++){
-        sol[i]=i+1;
-    }
+            if(currentCost<bestCost){
+                bestCost=currentCost;
 
-}
-
-int cost(vector<int> const& data){
-    //todo
-    return 0;
-}
-
-int getBestSol(vector<vector<int>> const& neighbors){
-    int bestSolIndex=0;
-    for(int i=1;i<neighbors.size();i++){
-        if(cost(neighbors[i])<cost(neighbors[bestSolIndex])){
-            bestSolIndex=i;
-        }
-    }
-    return bestSolIndex;
-}
-
-
-
-void run(vector<int> const& d, vector<int> const& f, vector<int>&bestSol, bool startFromSol, int nbrIter, int tabouSize){
-
-    vector<int> currentSol;
-    list<vector<int >> tabou;
-    vector<vector<int >> neighbors;
-
-    if(! startFromSol){
-        initSol(bestSol, NULL, NULL);
-    }
-    currentSol=bestSol;
-
-    while(nbrIter>0){
-
-        getNeighbors(neighbors, bestSol);
-
-        for(int i=0; i<=neighbors.size();i++){
-            vector<int> data=neighbors[i];
-            for(int j=0;j<=tabou.size();j++){
-                list<vector<int >>::iterator it= tabou.begin();
-                advance(it, j);
-                if(data == *it ){
-                    neighbors.erase(neighbors.begin()+i);
+                for(int k=0; k<n;k++){
+                    bestNeighbor[k]=currentNeighbor[k];
                 }
             }
-
         }
-        int indexBestSol=getBestSol(neighbors);
-        if(tabou.size()==tabouSize){
-            tabou.pop_back();
-            tabou.push_front(currentSol);
-        }
-        currentSol=neighbors[indexBestSol];
-        if(cost(currentSol)<cost(bestSol)){
-            bestSol=currentSol;
-        }
-
-
-        nbrIter--;
     }
+    return bestNeighbor;
+}
+
+int Tabou::run(int startSol[]) {
+    vector<int> bestSol(startSol,startSol+n);//[copie OK]
+    vector<int> currentSol(n);//[taille OK]
+    vector<int> neighbor(12);
+    currentSol=bestSol;//[copie OK]
+    int currentCost=std::numeric_limits<int>::max();
+    int bestCost=std::numeric_limits<int>::max();
+    list<vector<int>>:: iterator it;
+
+
+    list<vector<int>> tabou;
+
+    bool canContinue=true;
+
+    while(canContinue) {
+        canContinue = continu();
+
+        if (tabou.size() == tabouSize) {
+            tabou.pop_back();
+        }
+        tabou.push_front(currentSol);
+
+        neighbor = bestNeighborNotInTabou(tabou, currentSol);
+        currentSol=neighbor;
+        currentCost = computeObjectiveValue(currentSol);
+
+        if(currentCost<bestCost){
+            bestCost=currentCost;
+
+            for(int i=0;i<n;i++){
+                bestSol[i]=neighbor[i];
+            }
+        }
+        for(int j=0;j<n;j++){
+            currentSol[j]=neighbor[j];
+        }
+
+    }
+
+
+    return 0;
 
 }
