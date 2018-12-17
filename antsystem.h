@@ -24,7 +24,7 @@ class antSystem {
 
         // on déroule l'exécution sur n itérations
 
-        void run(int n);
+        void run(int n, double duration);
 
         int pathCount;
 

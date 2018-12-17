@@ -102,7 +102,8 @@ int main(int argc, char **argv) {
 
     // villes, borne sup, borne inf, coeff d'évaporation en %
 
-    int nbIterations = 30000;
+    int nbIterations = 3000000;
+    double time = 10.0;
     int nbFourmis = 100000/n;
     srand(0);
     //586 problem p(n, 50, 1, 10);
@@ -125,7 +126,7 @@ int main(int argc, char **argv) {
     cout << "Système créé" << endl;
 
     // unités de temps
-    sys.run(nbIterations);
+    sys.run(nbIterations, time);
 
     cout << sys.pathCount << "chemins testés" << endl;
 }

@@ -26,15 +26,19 @@ antSystem::~antSystem(){
         delete *i;
 }
 
-void antSystem::run(int n){
+void antSystem::run(int n, double duration){
+
+    std::clock_t start;
+    start = std::clock();
+
     for (curIteration=0; curIteration<n; curIteration++){
+        double durationstart = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
         // process each ant
         std::list<ant*>::iterator it = ants.begin();
         while (it != ants.end()){
             try{
                 (*it)->frame();
             }catch(antException &e){
-
                 // La fourmi a trouvé une solution
                 // On notifie la solution, on crée une nouvelle fourmi et on supprime l'ancienne
                 if (e.state == antException::TO_REGISTER) {
@@ -58,6 +62,17 @@ void antSystem::run(int n){
 
         if (curIteration%50==0)
             std::cout << "Meilleur objectif : " << bestObj << std::endl;
+
+        if (duration < durationstart){
+            cout<<"Time elapsed : "<<durationstart<<" seconds"<<endl;
+            cout<<"Number of iterations : "<<curIteration<<endl;
+            break;
+        }
+
+        if(curIteration==n-1){
+            cout<<"Time elapsed : "<<durationstart<<" seconds"<<endl;
+            cout<<"Number of iterations : "<<curIteration+1<<endl;
+        }
     }
 }
 
