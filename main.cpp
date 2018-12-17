@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 
+#include <time.h>
 #include "QAP.h"
 #include "GRASP.h"
 
@@ -10,6 +11,7 @@ using namespace std;
 int main() {
 
     string dataName = "nug12";
+    srand(time(NULL));
 
     // Uncomment these lines before using the executable !
     char rep;
@@ -19,8 +21,8 @@ int main() {
         cin >> dataName;
     /********************************************/
 
-        float alphaGRASP = 0.2;
-        float maxTimeGRASP = 10.0f;
+        float alphaGRASP = 0.7;
+        float maxTimeGRASP = 30.0f;
 
         try {
             /*

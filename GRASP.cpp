@@ -11,15 +11,11 @@ int *GRASP::run(const float &maxTimeSec) {
     clock_t t_init = clock();
 
     int *s = new int[n];
-    int iter = 0;
     do {
-        iter++;
-//        std::cout << "Iteration " << iter << std::endl;
-//        std::cout << "Elapsed time : " << (float)(clock() - t_init) / CLOCKS_PER_SEC << std::endl;
         updateBest(localSearch(greedyProbability(s)));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
-    std::cout << "End of GRASP (" << iter << " iterations) !" << std::endl;
+    std::cout << "End of GRASP !" << std::endl;
     objectiveValue = computeObjectiveValue(n, solution);
     delete[] s;
     return solution;
@@ -123,6 +119,8 @@ int *GRASP::localSearch(int *s) {
 
     int temp;
     auto *v = new int[n];
+    clock_t t_init = clock();
+    float tMax = 10.0f;
     do {
         // Find neighbors
         for (int i = 0; i < n - 1; i++) {
@@ -157,7 +155,7 @@ int *GRASP::localSearch(int *s) {
             locked = true;
         }
 
-    } while(!locked);
+    } while(!locked && (float) clock() - t_init <= tMax);
 
     return s;
 }
