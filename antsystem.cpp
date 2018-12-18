@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include <pthread.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -101,34 +103,4 @@ void antSystem::notifySolution(int value, std::vector<int>& factories){
             std::cout << std::endl;
         }
     }
-}
-
-struct ThreadParams{
-    int n;
-    double duration;
-};
-
-void* antSystem :: runThread(void* args){
-    ThreadParams *params=(ThreadParams*) args;
-    run(params->n, params->duration);
-    cout<<"One thread executed"<<endl;
-}
-
-int antSystem :: runThreads(int n, double duration, int numberOfThreads){
-    ThreadParams params;
-    params.n=n;
-    params.duration=duration;
-
-    pthread_t liste[numberOfThreads];
-
-    for (int i = 0; i <numberOfThreads ; ++i) {
-        ThreadParams paramsLoop=params;
-        pthread_create(&liste[i], NULL, runThread, &paramsLoop);
-    }
-
-    for (int j = 0; j <numberOfThreads ; ++j) {
-        pthread_join(liste[j], NULL);
-    }
-
-    return 0;
 }

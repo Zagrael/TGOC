@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/tai100a.dat";
-const char* FILE_SOLUTION = "../instances/tai100a.sln";
+const char* FILE_DATA = "../instances/tai15b.dat";
+const char* FILE_SOLUTION = "../instances/tai15b.sln";
 
 const int N_MAX = 1000;
 int n;
@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
     // villes, borne sup, borne inf, coeff d'évaporation en %
 
     int nbIterations = 3000000;
-    double time = 10.0;
+    double time = 60.0;
     int nbFourmis = 100000/n;
     srand(0);
     //586 problem p(n, 50, 1, 10);
@@ -126,6 +126,7 @@ int main(int argc, char **argv) {
     cout << "Système créé" << endl;
 
     // unités de temps
+    //sys.run(nbIterations, time);
     sys.run(nbIterations, time);
 
     cout << sys.pathCount << "chemins testés" << endl;

@@ -19,15 +19,11 @@ class antSystem {
 
     public :
         antSystem(int, problem&);
-
         ~antSystem();
 
         // on déroule l'exécution sur n itérations
 
         void run(int n, double duration);
-        void* runThread(void* args);
-        int runThreads(int n, double duration, int numberOfThreads);
-
         int pathCount;
 
     private :

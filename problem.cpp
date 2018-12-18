@@ -13,7 +13,7 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
           pheromones(nbPlaces, std::vector<float>(nbPlaces, borneMin)),
           flows(nbPlaces, std::vector<int>(nbPlaces, 0))
 {
-    const char* FILE_DATA = "../instances/tai100a.dat";
+    const char* FILE_DATA = "../instances/tai15b.dat";
 
     ifstream in(FILE_DATA);
 
