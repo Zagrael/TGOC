@@ -19,13 +19,13 @@ int *GRASP::run(const float &maxTimeSec) {
         updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
 
         // Local search + tabu
-        s = localSearch(s);
-        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
+//        s = localSearch(s);
+//        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
 
         // Random + local search + tabu
-        std::shuffle(&s[0], &s[n], std::mt19937(std::random_device()()));
-        s = localSearch(s);
-        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
+//        std::shuffle(&s[0], &s[n], std::mt19937(std::random_device()()));
+//        s = localSearch(s);
+//        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
     std::cout << "End of GRASP !" << std::endl;
@@ -234,15 +234,17 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
 }
 
 vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol) {
+    //faire une transposition
     int n=sol.size();
     vector<int> bestNeighbor(n);
     vector<int> currentNeighbor(n);
 
     int bestCost=std::numeric_limits<int>::max();
     int currentCost=std::numeric_limits<int>::max();
-
+    /*
     for(int i=0;i<n-1;i++){//pour chaque voisin
         for(int j=0;j<n;j++){//on construit le voisin
+
 
             if(i==j){
                 currentNeighbor[j]=sol[j+1];
@@ -252,15 +254,33 @@ vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> s
                 currentNeighbor[j]=sol[j];
             }
         }
+    */
 
-        if(not isInTabou(tabou, currentNeighbor)){
-            currentCost=computeObjectiveValue(currentNeighbor);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            for(int k=0;k<n;k++){
+                if(j>i and k==j){
+                    currentNeighbor[k]=sol[i];
+                    currentNeighbor[i]=sol[k];
+                    //printVector(sol);
+                    //printf("------------\n\n");
+                    //printf("%d\n",sol[i]);
+                }else{
+                    currentNeighbor[k]=sol[k];
+                    //printf("t%d\n",sol[i]);
+                }
+            }
 
-            if(currentCost<bestCost){
-                bestCost=currentCost;
+            //printVector(currentNeighbor);
+            if(not isInTabou(tabou, currentNeighbor)){
+                currentCost=computeObjectiveValue(currentNeighbor);
 
-                for(int k=0; k<n;k++){
-                    bestNeighbor[k]=currentNeighbor[k];
+                if(currentCost<bestCost){
+                    bestCost=currentCost;
+
+                    for(int k=0; k<n;k++){
+                        bestNeighbor[k]=currentNeighbor[k];
+                    }
                 }
             }
         }

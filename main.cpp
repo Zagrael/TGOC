@@ -3,8 +3,8 @@
 #include <string>
 
 #include <time.h>
-#include "QAP.h"
 #include "GRASP.h"
+#include "SimulatedAnnealing.h"
 
 using namespace std;
 
@@ -13,6 +13,7 @@ int main() {
     string dataName = "nug12";
     srand(time(NULL));
 
+    string files[] = {"bur26a", "chr18a", "els19", "kra32", "nug12", "nug30", "sko42", "tai15a", "tai15b", "tai100a"};
     // Uncomment these lines before using the executable !
     char rep;
     do {
@@ -21,13 +22,18 @@ int main() {
         cin >> dataName;
     /********************************************/
 
-        float alphaGRASP = 0.7;
-        float maxTimeGRASP = 60.0f;
+    // Uncomment this line to run all files
+//    for(int zk = 0; zk < files->length(); zk++) {
+//        dataName = files[zk];
+//        cout << "Trying " << dataName << endl;
+    /*********************************************/
 
+        /*
+         * Apply GRASP algorithm
+         * */
         try {
-            /*
-             * Apply GRASP algorithm
-             * */
+            float alphaGRASP = 0.6;
+            float maxTimeGRASP = 20.0f;
             GRASP grasp(dataName, alphaGRASP);
             int *solutionGRASP = grasp.run(maxTimeGRASP);
             cout << "Solution found with GRASP :";
@@ -43,6 +49,31 @@ int main() {
             cerr << msg << endl;
         }
 
+        /*
+         * Apply Simulated Annealing algorithm
+         * */
+        try {
+            float maxTimeSA = 30.0f;
+            int tempInit = 10000;
+            float alphaSA = 0.9;
+            int iterByTemp = 1000;
+            SimulatedAnnealing sa(dataName, tempInit, alphaSA, iterByTemp);
+            int *solutionGRASP = sa.run(maxTimeSA);
+            cout << "Solution found with Simulated Annealing :";
+            for (int i = 0; i < sa.getN(); i++) {
+                cout << " " << solutionGRASP[i];
+            }
+            cout << endl << "Admissible solution ? " << (QAP::isAdmissible(sa.getN(), solutionGRASP) ? "YES" : "NO")
+                 << endl;
+            cout << "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
+
+            sa.displayOptimalSolution();
+        } catch (const char *msg) {
+            cerr << msg << endl;
+        }
+
+    /******************************************/
+//    }
         // Uncomment these lines before using the executable !
         cout << "Try with another file ? (Y/N) ";
         cin >> rep;
