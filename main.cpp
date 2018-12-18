@@ -15,17 +15,17 @@ int main() {
 
     string files[] = {"bur26a", "chr18a", "els19", "kra32", "nug12", "nug30", "sko42", "tai15a", "tai15b", "tai100a"};
     // Uncomment these lines before using the executable !
-    char rep;
-    do {
-        system("CLS");
-        cout << "Data name (bur26a, chr18a, els19, kra32, nug12, nug30, sko42, tai15a, tai15b, tai100a, ...) : ";
-        cin >> dataName;
+//    char rep;
+//    do {
+//        system("CLS");
+//        cout << "Data name (bur26a, chr18a, els19, kra32, nug12, nug30, sko42, tai15a, tai15b, tai100a, ...) : ";
+//        cin >> dataName;
     /********************************************/
 
     // Uncomment this line to run all files
-//    for(int zk = 0; zk < files->length(); zk++) {
-//        dataName = files[zk];
-//        cout << "Trying " << dataName << endl;
+    for(int zk = 0; zk < files->length(); zk++) {
+        dataName = files[zk];
+        cout << "Trying " << dataName << endl;
     /*********************************************/
 
         /*
@@ -33,7 +33,7 @@ int main() {
          * */
         try {
             float alphaGRASP = 0.6;
-            float maxTimeGRASP = 20.0f;
+            float maxTimeGRASP = 60.0f;
             GRASP grasp(dataName, alphaGRASP);
             int *solutionGRASP = grasp.run(maxTimeGRASP);
             cout << "Solution found with GRASP :";
@@ -53,7 +53,7 @@ int main() {
          * Apply Simulated Annealing algorithm
          * */
         try {
-            float maxTimeSA = 30.0f;
+            float maxTimeSA = 60.0f;
             int tempInit = 10000;
             float alphaSA = 0.9;
             int iterByTemp = 1000;
@@ -73,11 +73,12 @@ int main() {
         }
 
     /******************************************/
-//    }
+    }
+    system("pause");
         // Uncomment these lines before using the executable !
-        cout << "Try with another file ? (Y/N) ";
-        cin >> rep;
-    } while(rep != 'N');
+//        cout << "Try with another file ? (Y/N) ";
+//        cin >> rep;
+//    } while(rep != 'N');
     /************************************/
     return 0;
 }

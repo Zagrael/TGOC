@@ -16,7 +16,7 @@ int *GRASP::run(const float &maxTimeSec) {
     do {
         s = greedyProbability(s);
         // Tabu search only
-        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
+        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 10, std::numeric_limits<int>::max())[0]));
 
         // Local search + tabu
 //        s = localSearch(s);
