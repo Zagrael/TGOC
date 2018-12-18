@@ -1,3 +1,5 @@
+#include <random>
+
 //
 // Created by Aymerick on 15-12-18.
 //
@@ -12,7 +14,18 @@ int *GRASP::run(const float &maxTimeSec) {
 
     int *s = new int[n];
     do {
-        updateBest(localSearch(greedyProbability(s)));
+        s = greedyProbability(s);
+        // Tabu search only
+        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
+
+        // Local search + tabu
+        s = localSearch(s);
+        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
+
+        // Random + local search + tabu
+        std::shuffle(&s[0], &s[n], std::mt19937(std::random_device()()));
+        s = localSearch(s);
+        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
     std::cout << "End of GRASP !" << std::endl;
@@ -170,52 +183,6 @@ void GRASP::updateBest(int *s) {
     }
 }
 
-vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol) {
-    int n=sol.size();
-    vector<int> bestNeighbor(n);
-    vector<int> currentNeighbor(n);
-
-    int bestCost=std::numeric_limits<int>::max();
-    int currentCost;
-
-    for(int i=0;i<n-1;i++){//pour chaque voisin
-        for(int j=0;j<n;j++){//on construit le voisin
-
-            if(i==j){
-                currentNeighbor[j]=sol[j+1];
-                currentNeighbor[j+1]=sol[j];
-                j++;
-            }else{
-                currentNeighbor[j]=sol[j];
-            }
-        }
-
-        if(not isInTabou(tabou, currentNeighbor)){
-            currentCost=computeObjectiveValue(currentNeighbor);
-
-            if(currentCost<bestCost){
-                bestCost=currentCost;
-
-                for(int k=0; k<n;k++){
-                    bestNeighbor[k]=currentNeighbor[k];
-                }
-            }
-        }
-    }
-    return bestNeighbor;
-}
-
-bool GRASP::isInTabou(list<vector<int>> tabou, vector<int> sol) {
-    list<vector<int>>:: iterator it;
-
-    for(it=tabou.begin();it!=tabou.end();it++){
-        if(*it==sol){
-            return true;
-        }
-    }
-    return false;
-}
-
 vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals) {
     //stop time en secondes
     vector<int> bestSol=startSol;//[copie OK]
@@ -259,13 +226,60 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
             currentSol[j]=neighbor[j];
         }
         //printVector(bestSol);
+
     }
+
 
     return bestSol;
 }
 
-int GRASP::computeObjectiveValue(vector<int> solution) {
+vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol) {
+    int n=sol.size();
+    vector<int> bestNeighbor(n);
+    vector<int> currentNeighbor(n);
 
+    int bestCost=std::numeric_limits<int>::max();
+    int currentCost=std::numeric_limits<int>::max();
+
+    for(int i=0;i<n-1;i++){//pour chaque voisin
+        for(int j=0;j<n;j++){//on construit le voisin
+
+            if(i==j){
+                currentNeighbor[j]=sol[j+1];
+                currentNeighbor[j+1]=sol[j];
+                j++;
+            }else{
+                currentNeighbor[j]=sol[j];
+            }
+        }
+
+        if(not isInTabou(tabou, currentNeighbor)){
+            currentCost=computeObjectiveValue(currentNeighbor);
+
+            if(currentCost<bestCost){
+                bestCost=currentCost;
+
+                for(int k=0; k<n;k++){
+                    bestNeighbor[k]=currentNeighbor[k];
+                }
+            }
+        }
+    }
+    return bestNeighbor;
+}
+
+bool GRASP::isInTabou(list<vector<int>> tabou, vector<int> sol) {
+    list<vector<int>>:: iterator it;
+
+    for(it=tabou.begin();it!=tabou.end();it++){
+        if(*it==sol){
+            return true;
+        }
+    }
+    return false;
+}
+
+int GRASP::computeObjectiveValue(vector<int> solution) {
     int value = 0;
     int n=solution.size();
     for(int i = 0; i < n; i++) {
@@ -276,13 +290,4 @@ int GRASP::computeObjectiveValue(vector<int> solution) {
         }
     }
     return value;
-}
-
-
-void GRASP::printVector(vector<int> v){
-    vector<int>::iterator it;
-    for(it=v.begin(); it!=v.end();it++){
-        printf("%d, ",*it);
-    }
-    printf("%s: %d\n","cost",computeObjectiveValue(v));
 }

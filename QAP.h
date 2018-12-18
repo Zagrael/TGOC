@@ -9,8 +9,6 @@
 #include <fstream>
 #include <string>
 
-const int N_MAX = 1000;
-
 class QAP {
 
     std::string dataName;

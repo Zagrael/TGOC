@@ -22,7 +22,7 @@ int main() {
     /********************************************/
 
         float alphaGRASP = 0.7;
-        float maxTimeGRASP = 30.0f;
+        float maxTimeGRASP = 60.0f;
 
         try {
             /*

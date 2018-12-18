@@ -8,8 +8,10 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <algorithm>
 #include <list>
 #include "QAP.h"
+//#include "Tabou.h"
 
 using namespace std;
 
@@ -28,13 +30,11 @@ public:
     int *localSearch(int *s);
     void updateBest(int *s);
 
-private:
-    // For tabu search
-    bool isInTabou(list<vector<int>> tabou, vector<int> sol);
-    vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol);
+    // Tabu functions
     vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals);
+    vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol);
+    bool isInTabou(list<vector<int>> tabou, vector<int> sol);
     int computeObjectiveValue(vector<int> solution);
-    void printVector(vector<int> v);
 };
 
 
