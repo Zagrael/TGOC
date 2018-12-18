@@ -14,6 +14,7 @@ int main() {
     srand(time(NULL));
 
     string files[] = {"bur26a", "chr18a", "els19", "kra32", "nug12", "nug30", "sko42", "tai15a", "tai15b", "tai100a"};
+    int nFiles = 10;
     // Uncomment these lines before using the executable !
 //    char rep;
 //    do {
@@ -23,7 +24,7 @@ int main() {
     /********************************************/
 
     // Uncomment this line to run all files
-    for(int zk = 0; zk < files->length(); zk++) {
+    for(int zk = 0; zk < 10; zk++) {
         dataName = files[zk];
         cout << "Trying " << dataName << endl;
     /*********************************************/
