@@ -3,27 +3,33 @@
 // Created by arnaud on 11/12/18.
 //
 
-#include "Tabou.h"
+using namespace std;
+#include <vector>
+#include <cstdio>
+#include <list>
+#include <limits>
+#include "main.h"
+#include <ctime>
+#include <pthread.h>
+#include <random>
+#include <algorithm>
+#include <unistd.h>
 
-Tabou::Tabou(const int &n, int F[][N_MAX], int D[][N_MAX], int time, int tabouSize):QAP(n, F, D){
-    this->time=time;
-    this->tabouSize=tabouSize;
-}
-
-int Tabou::computeObjectiveValue(vector<int> solution) {
+int computeObjectiveValue(vector<int> solution) {
 
     int value = 0;
+    int n=solution.size();
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
 
-            value += D[i][j] * F[solution[i] - 1][solution[j] - 1];
+            value += d[i][j] * f[solution[i] - 1][solution[j] - 1];
 
         }
     }
     return value;
 }
 
-void Tabou::printVector(vector<int> v){
+void printVector(vector<int> v){
     vector<int>::iterator it;
     for(it=v.begin(); it!=v.end();it++){
         printf("%d, ",*it);
@@ -31,19 +37,9 @@ void Tabou::printVector(vector<int> v){
     printf("%s: %d\n","cost",computeObjectiveValue(v));
 }
 
-bool Tabou:: continu(){
-    /*if(time==0){
-        return false;
-    }else{
-        time=time-1;
-        return true;
-    }*/
-    return true;
-
-}
 
 
-bool Tabou:: isInTabou(list<vector<int>> tabou, vector<int> sol){
+bool isInTabou(list<vector<int>> tabou, vector<int> sol){
 
     list<vector<int>>:: iterator it;
 
@@ -55,7 +51,8 @@ bool Tabou:: isInTabou(list<vector<int>> tabou, vector<int> sol){
     return false;
 }
 
-vector<int> Tabou:: bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
+vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
+    int n=sol.size();
     vector<int> bestNeighbor(n);
     vector<int> currentNeighbor(n);
 
@@ -89,8 +86,9 @@ vector<int> Tabou:: bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> 
     return bestNeighbor;
 }
 
-int Tabou::run(int startSol[]) {
-    vector<int> bestSol(startSol,startSol+n);//[copie OK]
+vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals) {
+    //stop time en secondes
+    vector<int> bestSol=startSol;//[copie OK]
     vector<int> currentSol(n);//[taille OK]
     vector<int> neighbor(12);
     currentSol=bestSol;//[copie OK]
@@ -102,9 +100,11 @@ int Tabou::run(int startSol[]) {
     list<vector<int>> tabou;
 
     bool canContinue=true;
+    const long double sysTime = time(0);
+    int numberOfBestEquals=0;
 
     while(canContinue) {
-        canContinue = continu();
+        canContinue = ((numberOfBestEquals<=numberOfEquals) and (difftime(time(0), sysTime)<=stopAfterTime));
 
         if (tabou.size() == tabouSize) {
             tabou.pop_back();
@@ -117,18 +117,85 @@ int Tabou::run(int startSol[]) {
 
         if(currentCost<bestCost){
             bestCost=currentCost;
+            numberOfBestEquals=0;
 
             for(int i=0;i<n;i++){
                 bestSol[i]=neighbor[i];
             }
+        }else{
+            numberOfBestEquals++;
         }
         for(int j=0;j<n;j++){
             currentSol[j]=neighbor[j];
         }
+        //printVector(bestSol);
 
     }
 
 
+    return bestSol;
+
+}
+
+struct ThreadParams{
+    vector<int> startSol;
+    int n;
+    int tabouSize;
+    int stopAfterTime;
+    int numberOfEquals;
+};
+
+void* runThread(void* args){
+    //	long timeout=(long) arg;
+    ThreadParams *params=(ThreadParams*) args;
+    printf("sol init: ");
+    printVector(params->startSol);
+    vector<int> retour=run(params->startSol,params->n, params->tabouSize, params->stopAfterTime, params->numberOfEquals);
+    printf("%s\n", "Un thread a finis");
+    printVector(retour);
+    printf("%s\n", "---------\n");
+
+}
+
+int runWithThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
+    ThreadParams params;
+    params.n=n;
+    params.tabouSize=tabouSize;
+    params.stopAfterTime=stopAfterTime;
+    params.numberOfEquals=numberOfEquals;
+    //vector<int> startSolV(startSol,startSol+n);
+    vector<int> toto(n);
+    for(int l=0;l<n;l++){
+        toto[l]=l+1;
+    }
+    params.startSol= toto;
+
+    pthread_t liste[numberOfThreads];
+    /*
+    ThreadParams params1=params;
+
+    random_shuffle(toto.begin(), toto.end());
+    params1.startSol=toto;
+
+    printVector(params.startSol);
+    printVector(params1.startSol);*/
+
+
+    for (int i = 0; i <numberOfThreads ; ++i) {
+        ThreadParams paramsLoop=params;
+        random_shuffle(toto.begin(),toto.end());
+        paramsLoop.startSol=toto;
+        pthread_create(&liste[i], NULL, runThread, &paramsLoop);
+        sleep(1);
+
+    }
+
+    for (int j = 0; j <numberOfThreads ; ++j) {
+        pthread_join(liste[j], NULL);
+
+    }
+
+    printf("terminé !\n");
     return 0;
 
 }

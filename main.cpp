@@ -1,14 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
+#include <pthread.h>
+#include <unistd.h>
 #include "Tabou.h"
+
+
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/nug12.dat";
-const char* FILE_SOLUTION = "../instances/nug12.sln";
+const char* FILE_DATA = "../instances/bur26a.dat";
+const char* FILE_SOLUTION = "../instances/bur26a.sln";
 
-//const int N_MAX = 1000;
+const int N_MAX = 1000;
 int n;
 int f[N_MAX][N_MAX];
 int d[N_MAX][N_MAX];
@@ -79,40 +84,30 @@ int computeObjectiveValue(const int &n, int solution[]) {
 }
 
 int main() {
-    /*cout << "Hello, World!" << endl;
-
-    // Read inputs
-    if(!readData()) return -1;
-    cout << "Distances matrix : " << endl;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            cout << " " << d[i][j];
-        }
-        cout << endl;
-    }
-    cout << "Flow matrix : " << endl;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            cout << " " << f[i][j];
-        }
-        cout << endl;
-    }
-
-    // Read the solution
-    if(!readSolution()) return -1;
-    cout << "n = " << n << endl;
-    cout << "Objective value : " << objectiveValue << endl;
-    cout << "Optimal solution :";
-    for(int i = 0; i < n; i++) {
-        cout << " " << sol[i];
-    }*/
     cout << "Hello, World!" << endl;
 
     readData();
     readSolution();
-
-    Tabou tabou(n, f, d, 100000 ,100000);
+    int sol[]={1,2,3,4,5,6,7,8,9,10,11,12};
+    //Tabou tabou(n, f, d, 100000 ,700);
     //int retour=tabou.run(sol);
+
+    //int r=run(sol, n, 700);
+    //int runWithThreads(int startSol[], int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
+    runWithThreads(n, 70, 30, std::numeric_limits<int>::max(), 12);
+
+
+    /*
+    const long double sysTime1 = time(0);
+    cout << sysTime1 << endl;
+    sleep(10);
+    const long double sysTime2 = time(0);
+    cout << sysTime2 << endl;
+
+    cout << difftime(sysTime2,sysTime1) << endl;
+    */
+
+
 
     return 0;
 }
