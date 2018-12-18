@@ -27,49 +27,6 @@ antSystem::~antSystem(){
         delete *i;
 }
 
-int runThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
-    ThreadParams params;
-    params.n=n;
-    params.tabouSize=tabouSize;
-    params.stopAfterTime=stopAfterTime;
-    params.numberOfEquals=numberOfEquals;
-    //vector<int> startSolV(startSol,startSol+n);
-    vector<int> toto(n);
-    for(int l=0;l<n;l++){
-        toto[l]=l+1;
-    }
-    params.startSol= toto;
-
-    pthread_t liste[numberOfThreads];
-    /*
-    ThreadParams params1=params;
-
-    random_shuffle(toto.begin(), toto.end());
-    params1.startSol=toto;
-
-    printVector(params.startSol);
-    printVector(params1.startSol);*/
-
-
-    for (int i = 0; i <numberOfThreads ; ++i) {
-        ThreadParams paramsLoop=params;
-        random_shuffle(toto.begin(),toto.end());
-        paramsLoop.startSol=toto;
-        pthread_create(&liste[i], NULL, runThread, &paramsLoop);
-        sleep(1);
-
-    }
-
-    for (int j = 0; j <numberOfThreads ; ++j) {
-        pthread_join(liste[j], NULL);
-
-    }
-
-    printf("terminé !\n");
-    return 0;
-
-}
-
 void antSystem::run(int n, double duration){
 
     std::clock_t start;
@@ -144,4 +101,28 @@ void antSystem::notifySolution(int value, std::vector<int>& factories){
             std::cout << std::endl;
         }
     }
+}
+
+struct ThreadParams{
+    int n;
+    double duration;
+};
+
+void* antSystem :: runThread(void* args){
+    ThreadParams *params=(ThreadParams*) args;
+    run(params->n, params->duration);
+    cout<<"One thread executed"<<endl;
+}
+
+int antSystem :: runThreads(int n, double duration, int numberOfThreads){
+    ThreadParams params;
+    params.n=n;
+    params.duration=duration;
+
+    for (int j = 0; j <numberOfThreads ; ++j) {
+
+
+    }
+
+    return 0;
 }
