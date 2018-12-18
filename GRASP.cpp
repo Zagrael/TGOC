@@ -176,7 +176,7 @@ vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> s
     vector<int> currentNeighbor(n);
 
     int bestCost=std::numeric_limits<int>::max();
-    int currentCost=std::numeric_limits<int>::max();
+    int currentCost;
 
     for(int i=0;i<n-1;i++){//pour chaque voisin
         for(int j=0;j<n;j++){//on construit le voisin
