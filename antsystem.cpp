@@ -119,9 +119,14 @@ int antSystem :: runThreads(int n, double duration, int numberOfThreads){
     params.n=n;
     params.duration=duration;
 
+    for (int i = 0; i <numberOfThreads ; ++i) {
+        ThreadParams paramsLoop=params;
+        runThread(paramsLoop);
+        pthread_create(&liste[i], NULL, runThread, &paramsLoop);
+    }
+
     for (int j = 0; j <numberOfThreads ; ++j) {
-
-
+        pthread_join(liste[j], NULL);
     }
 
     return 0;
