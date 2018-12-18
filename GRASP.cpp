@@ -64,7 +64,7 @@ float *GRASP::computeProbabilities(int *s, const int &nS, float *p) {
             costs[i] = cost;
             if(cost < minCost || minCost == -1)
                 minCost = cost;
-            if(cost > maxCost || maxCost == -1)
+            if(cost > maxCost)
                 maxCost = cost;
         }
     }
