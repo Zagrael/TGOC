@@ -52,15 +52,17 @@ bool isInTabou(list<vector<int>> tabou, vector<int> sol){
 }
 
 vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
+    //faire une transposition
     int n=sol.size();
     vector<int> bestNeighbor(n);
     vector<int> currentNeighbor(n);
 
     int bestCost=std::numeric_limits<int>::max();
     int currentCost=std::numeric_limits<int>::max();
-
+    /*
     for(int i=0;i<n-1;i++){//pour chaque voisin
         for(int j=0;j<n;j++){//on construit le voisin
+
 
             if(i==j){
                 currentNeighbor[j]=sol[j+1];
@@ -70,15 +72,33 @@ vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
                 currentNeighbor[j]=sol[j];
             }
         }
+    */
 
-        if(not isInTabou(tabou, currentNeighbor)){
-            currentCost=computeObjectiveValue(currentNeighbor);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            for(int k=0;k<n;k++){
+                if(j>i and k==j){
+                    currentNeighbor[k]=sol[i];
+                    currentNeighbor[i]=sol[k];
+                    //printVector(sol);
+                    //printf("------------\n\n");
+                    //printf("%d\n",sol[i]);
+                }else{
+                    currentNeighbor[k]=sol[k];
+                    //printf("t%d\n",sol[i]);
+                }
+            }
 
-            if(currentCost<bestCost){
-                bestCost=currentCost;
+            //printVector(currentNeighbor);
+            if(not isInTabou(tabou, currentNeighbor)){
+                currentCost=computeObjectiveValue(currentNeighbor);
 
-                for(int k=0; k<n;k++){
-                    bestNeighbor[k]=currentNeighbor[k];
+                if(currentCost<bestCost){
+                    bestCost=currentCost;
+
+                    for(int k=0; k<n;k++){
+                        bestNeighbor[k]=currentNeighbor[k];
+                    }
                 }
             }
         }
@@ -92,7 +112,7 @@ vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, i
     vector<int> currentSol(n);//[taille OK]
     vector<int> neighbor(12);
     currentSol=bestSol;//[copie OK]
-    int currentCost=std::numeric_limits<int>::max();
+    int currentCost;
     int bestCost=std::numeric_limits<int>::max();
     list<vector<int>>:: iterator it;
 
@@ -110,7 +130,7 @@ vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, i
             tabou.pop_back();
         }
         tabou.push_front(currentSol);
-
+        //printVector(currentSol);
         neighbor = bestNeighborNotInTabou(tabou, currentSol);
         currentSol=neighbor;
         currentCost = computeObjectiveValue(currentSol);
@@ -197,5 +217,4 @@ int runWithThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, 
 
     printf("terminé !\n");
     return 0;
-
 }

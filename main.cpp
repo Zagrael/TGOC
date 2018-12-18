@@ -10,8 +10,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/bur26a.dat";
-const char* FILE_SOLUTION = "../instances/bur26a.sln";
+const char* FILE_DATA = "../instances/kra32.dat";
+const char* FILE_SOLUTION = "../instances/kra32.sln";
 
 const int N_MAX = 1000;
 int n;
@@ -88,13 +88,18 @@ int main() {
 
     readData();
     readSolution();
-    int sol[]={1,2,3,4,5,6,7,8,9,10,11,12};
+    vector<int>sol(n);
+    for(int i=0;i<n;i++){
+        sol[i]=i+1;
+    }
     //Tabou tabou(n, f, d, 100000 ,700);
     //int retour=tabou.run(sol);
 
     //int r=run(sol, n, 700);
-    //int runWithThreads(int startSol[], int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
-    runWithThreads(n, 70, 30, std::numeric_limits<int>::max(), 12);
+    //int runWithThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
+    runWithThreads(n, 300, 10, std::numeric_limits<int>::max(), 12);
+    //run(sol,n,500,10,std::numeric_limits<int>::max());
+    //vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals)
 
 
     /*
