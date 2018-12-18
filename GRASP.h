@@ -7,7 +7,11 @@
 
 #include <iostream>
 #include <time.h>
+#include <vector>
+#include <list>
 #include "QAP.h"
+
+using namespace std;
 
 class GRASP : public QAP {
     float alpha;
@@ -23,6 +27,14 @@ public:
     int choseProbability(float *p);
     int *localSearch(int *s);
     void updateBest(int *s);
+
+private:
+    // For tabu search
+    bool isInTabou(list<vector<int>> tabou, vector<int> sol);
+    vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol);
+    vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals);
+    int computeObjectiveValue(vector<int> solution);
+    void printVector(vector<int> v);
 };
 
 
