@@ -8,6 +8,7 @@
 #include "antexception.h"
 #include <algorithm>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -24,6 +25,49 @@ antSystem::antSystem(int nbAnt, problem& d):data(d){
 antSystem::~antSystem(){
     for (std::list<ant*>::iterator i = ants.begin(); i != ants.end(); i++)
         delete *i;
+}
+
+int runThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
+    ThreadParams params;
+    params.n=n;
+    params.tabouSize=tabouSize;
+    params.stopAfterTime=stopAfterTime;
+    params.numberOfEquals=numberOfEquals;
+    //vector<int> startSolV(startSol,startSol+n);
+    vector<int> toto(n);
+    for(int l=0;l<n;l++){
+        toto[l]=l+1;
+    }
+    params.startSol= toto;
+
+    pthread_t liste[numberOfThreads];
+    /*
+    ThreadParams params1=params;
+
+    random_shuffle(toto.begin(), toto.end());
+    params1.startSol=toto;
+
+    printVector(params.startSol);
+    printVector(params1.startSol);*/
+
+
+    for (int i = 0; i <numberOfThreads ; ++i) {
+        ThreadParams paramsLoop=params;
+        random_shuffle(toto.begin(),toto.end());
+        paramsLoop.startSol=toto;
+        pthread_create(&liste[i], NULL, runThread, &paramsLoop);
+        sleep(1);
+
+    }
+
+    for (int j = 0; j <numberOfThreads ; ++j) {
+        pthread_join(liste[j], NULL);
+
+    }
+
+    printf("terminé !\n");
+    return 0;
+
 }
 
 void antSystem::run(int n, double duration){
