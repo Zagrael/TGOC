@@ -14,6 +14,11 @@ using namespace std;
 #include <random>
 #include <algorithm>
 #include <unistd.h>
+#include <mutex>
+
+/*
+ * meilleure taille de fenetre 250 et meilleur voisinage 1
+ */
 
 int computeObjectiveValue(vector<int> solution) {
 
@@ -29,12 +34,18 @@ int computeObjectiveValue(vector<int> solution) {
     return value;
 }
 
-void printVector(vector<int> v){
+string printVector(vector<int> v){
     vector<int>::iterator it;
+    string s="";
     for(it=v.begin(); it!=v.end();it++){
-        printf("%d, ",*it);
+        //printf("%d, ",*it);
+        s=s+std::to_string(*it);
+        s+=", ";
     }
-    printf("%s: %d\n","cost",computeObjectiveValue(v));
+    //printf("%s: %d\n","cost",computeObjectiveValue(v));
+    s+=std::to_string(computeObjectiveValue(v));
+    s+="\n";
+    return s;
 }
 
 
@@ -51,18 +62,17 @@ bool isInTabou(list<vector<int>> tabou, vector<int> sol){
     return false;
 }
 
-vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
-    //faire une transposition
+
+vector<int> bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> sol){
     int n=sol.size();
     vector<int> bestNeighbor(n);
     vector<int> currentNeighbor(n);
 
     int bestCost=std::numeric_limits<int>::max();
-    int currentCost=std::numeric_limits<int>::max();
-    /*
+    int currentCost;
+
     for(int i=0;i<n-1;i++){//pour chaque voisin
         for(int j=0;j<n;j++){//on construit le voisin
-
 
             if(i==j){
                 currentNeighbor[j]=sol[j+1];
@@ -72,7 +82,31 @@ vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
                 currentNeighbor[j]=sol[j];
             }
         }
-    */
+
+        if(not isInTabou(tabou, currentNeighbor)){
+            currentCost=computeObjectiveValue(currentNeighbor);
+
+            if(currentCost<bestCost){
+                bestCost=currentCost;
+
+                for(int k=0; k<n;k++){
+                    bestNeighbor[k]=currentNeighbor[k];
+                }
+            }
+        }
+    }
+    return bestNeighbor;
+}
+
+
+
+vector<int> bestNeighborNotInTabou1(list<vector<int>> tabou, vector<int> sol){
+    int n=sol.size();
+    vector<int> bestNeighbor(n);
+    vector<int> currentNeighbor(n);
+
+    int bestCost=std::numeric_limits<int>::max();
+    int currentCost;
 
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
@@ -80,16 +114,12 @@ vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
                 if(j>i and k==j){
                     currentNeighbor[k]=sol[i];
                     currentNeighbor[i]=sol[k];
-                    //printVector(sol);
-                    //printf("------------\n\n");
-                    //printf("%d\n",sol[i]);
+
                 }else{
                     currentNeighbor[k]=sol[k];
-                    //printf("t%d\n",sol[i]);
                 }
             }
 
-            //printVector(currentNeighbor);
             if(not isInTabou(tabou, currentNeighbor)){
                 currentCost=computeObjectiveValue(currentNeighbor);
 
@@ -106,11 +136,14 @@ vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol){
     return bestNeighbor;
 }
 
-vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals) {
+vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals, int type) {
+    //numberOfEquals: nombre de best sol egales avant qu'on change de voisinage
     //stop time en secondes
     vector<int> bestSol=startSol;//[copie OK]
     vector<int> currentSol(n);//[taille OK]
     vector<int> neighbor(12);
+    int myType=type;// 0 ou 1
+
     currentSol=bestSol;//[copie OK]
     int currentCost;
     int bestCost=std::numeric_limits<int>::max();
@@ -124,14 +157,21 @@ vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, i
     int numberOfBestEquals=0;
 
     while(canContinue) {
-        canContinue = ((numberOfBestEquals<=numberOfEquals) and (difftime(time(0), sysTime)<=stopAfterTime));
+        canContinue = (/*(numberOfBestEquals<=numberOfEquals) and */(difftime(time(0), sysTime)<=stopAfterTime));
+        if(numberOfBestEquals>numberOfEquals){
+            myType=(myType+1)%2;
+        }
 
         if (tabou.size() == tabouSize) {
             tabou.pop_back();
         }
         tabou.push_front(currentSol);
-        //printVector(currentSol);
-        neighbor = bestNeighborNotInTabou(tabou, currentSol);
+
+        if(myType==0){
+            neighbor = bestNeighborNotInTabou0(tabou, currentSol);
+        }else{
+            neighbor = bestNeighborNotInTabou1(tabou, currentSol);
+        }
         currentSol=neighbor;
         currentCost = computeObjectiveValue(currentSol);
 
@@ -148,7 +188,6 @@ vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, i
         for(int j=0;j<n;j++){
             currentSol[j]=neighbor[j];
         }
-        //printVector(bestSol);
 
     }
 
@@ -163,58 +202,71 @@ struct ThreadParams{
     int tabouSize;
     int stopAfterTime;
     int numberOfEquals;
+    int type;
 };
 
+struct bestValue{
+    int bestCost=numeric_limits<int>::max();
+    vector<int> bestSol;
+    std::mutex mtx;
+
+    void writeNewSol(vector<int> sol){
+        mtx.lock();
+        int cost=computeObjectiveValue(sol);
+        if(cost<bestCost){
+            bestSol=sol;
+            bestCost=cost;
+        }
+        mtx.unlock();
+
+    }
+};
+bestValue bestValue;
 void* runThread(void* args){
-    //	long timeout=(long) arg;
     ThreadParams *params=(ThreadParams*) args;
-    printf("sol init: ");
-    printVector(params->startSol);
-    vector<int> retour=run(params->startSol,params->n, params->tabouSize, params->stopAfterTime, params->numberOfEquals);
-    printf("%s\n", "Un thread a finis");
-    printVector(retour);
-    printf("%s\n", "---------\n");
+    vector<int> retour=run(params->startSol,params->n, params->tabouSize, params->stopAfterTime, params->numberOfEquals, params->type);
+
+    bestValue.writeNewSol(retour);
 
 }
 
-int runWithThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
+vector<int> runWithThreads(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads, int type){
     ThreadParams params;
     params.n=n;
     params.tabouSize=tabouSize;
+    params.type=type;
     params.stopAfterTime=stopAfterTime;
     params.numberOfEquals=numberOfEquals;
-    //vector<int> startSolV(startSol,startSol+n);
+
     vector<int> toto(n);
-    for(int l=0;l<n;l++){
-        toto[l]=l+1;
+
+    if(startSol.empty()){
+        for(int l=0;l<n;l++){
+            toto[l]=l+1;
+        }
+        params.startSol= toto;
+    }else{
+        params.startSol=startSol;
     }
-    params.startSol= toto;
 
     pthread_t liste[numberOfThreads];
-    /*
-    ThreadParams params1=params;
-
-    random_shuffle(toto.begin(), toto.end());
-    params1.startSol=toto;
-
-    printVector(params.startSol);
-    printVector(params1.startSol);*/
-
 
     for (int i = 0; i <numberOfThreads ; ++i) {
+        params.type=(params.type+1)%2;
         ThreadParams paramsLoop=params;
-        random_shuffle(toto.begin(),toto.end());
-        paramsLoop.startSol=toto;
+        if(startSol.empty()){
+            random_shuffle(toto.begin(),toto.end());
+            paramsLoop.startSol=toto;
+        }
+
         pthread_create(&liste[i], NULL, runThread, &paramsLoop);
         sleep(1);
 
     }
 
-    for (int j = 0; j <numberOfThreads ; ++j) {
-        pthread_join(liste[j], NULL);
-
+    for(int j=0;j<numberOfThreads;j++){
+        pthread_join(liste[j],NULL);
     }
 
-    printf("terminé !\n");
-    return 0;
+    return bestValue.bestSol;
 }

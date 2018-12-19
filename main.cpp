@@ -10,8 +10,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/kra32.dat";
-const char* FILE_SOLUTION = "../instances/kra32.sln";
+string FILE_DATA ;//= "../instances/nug12.dat";
+//char* FILE_SOLUTION = "../instances/nug12.sln";
 
 const int N_MAX = 1000;
 int n;
@@ -49,7 +49,7 @@ bool readData() {
     in.close();
     return true;
 }
-
+/*
 bool readSolution() {
     ifstream in(FILE_SOLUTION);
 
@@ -72,45 +72,56 @@ bool readSolution() {
     in.close();
     return true;
 }
-
-int computeObjectiveValue(const int &n, int solution[]) {
-    int value = 0;
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            value += d[i][j] * f[solution[i] - 1][solution[j] - 1];
-        }
-    }
-    return value;
-}
+*/
 
 int main() {
     cout << "Hello, World!" << endl;
-
-    readData();
+    //FILE_SOLUTION = "../instances/nug12.sln";
+    /*readData();
     readSolution();
     vector<int>sol(n);
     for(int i=0;i<n;i++){
         sol[i]=i+1;
+    }*/
+    vector<string> files{"bur26a", "chr18a", "els19", "kra32", "nug12", "nug30", "sko42", "tai15a", "tai15b", "tai100a"};
+    int tabouSize=50;
+    ofstream myfile;
+    for(int i=0;i<10;i++){
+        myfile.open ("example.txt", std::ios_base::app);
+        tabouSize=50;
+        FILE_DATA=std::string("../instances/")+files[i]+std::string(".dat");
+        readData();
+        myfile << std::string("fichier: ")+files[i].c_str()+std::string("\n");
+        vector<int>sol(n);
+        for(int i=0;i<n;i++){
+            sol[i]=i+1;
+        }
+        myfile.close();
+        for(int j=tabouSize;j<=1050;j=j+100){
+            myfile.open ("example.txt", std::ios_base::app);
+            printf("    tabousize: %d\n", j);
+            myfile << "    tabousize: ";
+            myfile << j;
+            myfile << "\n";
+            //printf("       voisinage 0: ");
+            myfile << "       voisinage 0: ";
+            myfile << printVector(run(sol, n, j, 30,std::numeric_limits<int>::max() ,0));
+            myfile << "       voisinage 1: ";
+            myfile << printVector(run(sol, n, j, 30,std::numeric_limits<int>::max() ,1));
+            myfile.close();
+            //printf("fin1");
+
+        }
+        myfile.open ("example.txt", std::ios_base::app);
+        myfile << "fin fichier --------------\n";
+        myfile.close();
+
+
+
     }
-    //Tabou tabou(n, f, d, 100000 ,700);
-    //int retour=tabou.run(sol);
-
-    //int r=run(sol, n, 700);
-    //int runWithThreads(int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads){
-    runWithThreads(n, 300, 10, std::numeric_limits<int>::max(), 12);
-    //run(sol,n,500,10,std::numeric_limits<int>::max());
-    //vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals)
+    printf("finis !");
 
 
-    /*
-    const long double sysTime1 = time(0);
-    cout << sysTime1 << endl;
-    sleep(10);
-    const long double sysTime2 = time(0);
-    cout << sysTime2 << endl;
-
-    cout << difftime(sysTime2,sysTime1) << endl;
-    */
 
 
 
