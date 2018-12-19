@@ -17,7 +17,6 @@ extern const int d[N_MAX][N_MAX];
 extern const int f[N_MAX][N_MAX];
 
 ant::ant(problem& d):data(d){
-    tmpVisitedLength = 0;
     objectif = 0;
     currentArcPos = -1;
     currentDestination = 0;
@@ -31,7 +30,6 @@ ant::ant(problem& d):data(d){
 void ant::frame(){
     switch(state){
         case SEARCHING_PATH:
-            tmpVisitedLength ++;
         case RETURNING:
             currentArcPos++;
             if (currentArcPos >= currentArcLength)
@@ -46,10 +44,9 @@ void ant::frame(){
 void ant::findNextSearchDestination(){
     switch(state){
         case NOTHING:{
-            //visitedPlaces.push_back(0);
             randomnumber = rand()%data.nbPlaces;
             visitedPlaces.push_back(randomnumber);
-            std::vector<int>::iterator tmp = placesStillToAffect.begin();
+            auto tmp = placesStillToAffect.begin();
             while (tmp != placesStillToAffect.end()){
                 if (*tmp == randomnumber){
                     placesStillToAffect.erase(tmp);
@@ -64,8 +61,6 @@ void ant::findNextSearchDestination(){
             currentDestination = dest;
             currentArcPos = randomnumber;
             currentArcLength = data.distances[randomnumber][currentDestination];
-            currentArcFlowSize = data.flows[randomnumber][currentDestination];
-            currentArcCost = currentArcFlowSize*currentArcLength;
 
             break;
         }
@@ -75,7 +70,7 @@ void ant::findNextSearchDestination(){
             visitedPlaces.push_back(currentDestination);
 
             //erase currentDestination des lieux à affecter
-            std::vector<int>::iterator tmp = placesStillToAffect.begin();
+            auto tmp = placesStillToAffect.begin();
             while (tmp != placesStillToAffect.end()){
                 if (*tmp == currentDestination){
                     placesStillToAffect.erase(tmp);
@@ -84,21 +79,13 @@ void ant::findNextSearchDestination(){
                 tmp++;
             }
 
-            //std::remove(placesStillToAffect.begin(), placesStillToAffect.end(), currentDestination );
-            //placesStillToAffect.resize(placesStillToAffect.size() -1);
-
-            if (placesStillToAffect.size() == 0){
+            if (placesStillToAffect.empty()){
                 // plus rien à affecter, le chemin est complet
                 // on revient vers le nid
-                tmpVisitedLength += data.distances[currentDestination][0];
-                flwVisitedLength += data.flows[currentDestination][0];
-
                 state = RETURNING;
                 currentOrigin =  int(visitedPlaces.size())-1;
                 currentDestination = int(visitedPlaces.size())-2;
                 currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
-                currentArcFlowSize = data.flows[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
-                currentArcCost = currentArcFlowSize*currentArcLength;
                 currentArcPos = currentArcLength;
                 return;
             }
@@ -107,8 +94,6 @@ void ant::findNextSearchDestination(){
             currentOrigin = currentDestination;
             currentDestination = dest;
             currentArcLength = data.distances[currentOrigin][currentDestination];
-            currentArcFlowSize = data.flows[currentOrigin][currentDestination];
-            currentArcCost = currentArcFlowSize*currentArcLength;
             currentArcPos = 0;
             break;
         }
@@ -118,8 +103,8 @@ void ant::findNextSearchDestination(){
                 // on change cette solution pour avoir les usines en fonction des emplacements = affectedFactories
 
                 int n = 0;
-                for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
-                    std::vector<int>::iterator tmp = visitedPlaces.begin();
+                for (auto i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
+                    auto tmp = visitedPlaces.begin();
                     while (tmp != visitedPlaces.end()){
                         if (visitedPlaces[*tmp] == n){
                             affectedFactories.push_back((*tmp) + 1);
@@ -134,7 +119,7 @@ void ant::findNextSearchDestination(){
                 //conversion en un tableau
                 int tab = 0;
 
-                for (vector<int>::const_iterator i = affectedFactories.begin(); i != affectedFactories.end(); ++i) {
+                for (auto i = affectedFactories.begin(); i != affectedFactories.end(); ++i) {
                     objectiftab[tab] = *i;
                     tab++;
                 }
@@ -146,7 +131,14 @@ void ant::findNextSearchDestination(){
                 }
 
                 // retournée au nid avec succès
-                data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif);
+                int r = 0 ;
+                for (auto i = visitedPlaces.begin(); i != visitedPlaces.end(); i++) {
+                    if (r+1>data.nbPlaces)
+                        break;
+                    data.setPheromones(visitedPlaces[r], visitedPlaces[r+1], objectif);
+                }
+
+                //data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif);
 
                 // sauver le résultat, changer de fourmi
                 antException e;
@@ -166,12 +158,12 @@ float ant :: visibility(int i, int j){
 
 
 int ant::getNearCity(int from){
-    // roulette sur les chemins restants, pondérés par les phéromones
+
     //pheromoneSize = total des phéromones entre le lieu actuel et les autres destinations possibles
     float pheromoneSize = 0;
     float proba = 0 ;
-    float alpha = 1 ;
-    float beta = 0.2 ;
+    float alpha = 2 ;
+    float beta = 0.5 ;
     vector<float> probavector;
 
     for (std::size_t i = 0; i < placesStillToAffect.size(); i++){
@@ -201,12 +193,16 @@ int ant::getNearCity(int from){
             continue;
         }
 
+        if(probavector.empty())
+            break;
+
         tmp += probavector[ii];
 
         if (tmp > number)
             break;
 
         ii ++;
+
     }
     if (ii == placesStillToAffect.size()){
         // aucune solution acceptable, détruire la fourmi courante

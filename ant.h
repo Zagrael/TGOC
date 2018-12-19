@@ -18,17 +18,11 @@ class ant{
     public :
         ant(problem&);
 
-        // liste des villes visitées / à visiter
+        // liste des lieux visités / à visiter
         std::vector<int> visitedPlaces;
         std::vector<int> placesStillToAffect;
         std::vector<int> affectedFactories;
         int objectiftab[N_MAX];
-
-        // compteur de longueur du chemin parcouru
-        long tmpVisitedLength;
-
-        // compteur du flow du chemin parcouru
-        long flwVisitedLength;
 
         // compteur du coût du chemin parcouru
         int objectif;
@@ -62,12 +56,7 @@ class ant{
         // seconde extrémité de l'arc actuellement parcouru
         int currentDestination;
 
-        // flux de la première extrémité de l'arc actuellement parcouru
-        int currentArcFlowSize;
-
         int randomnumber;
-        // coût de l'arc
-        long currentArcCost;
 
 
 

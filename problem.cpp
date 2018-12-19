@@ -13,7 +13,7 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
           pheromones(nbPlaces, std::vector<float>(nbPlaces, borneMin)),
           flows(nbPlaces, std::vector<int>(nbPlaces, 0))
 {
-    const char* FILE_DATA = "../instances/nug12.dat";
+    const char* FILE_DATA = "../instances/bur26a.dat";
 
     ifstream in(FILE_DATA);
 
@@ -37,33 +37,18 @@ problem::problem(int nbVilles, float borne1, float borne2, float coeff)
 
     in.close();
 
-
-    /*for (int i = 0; i<nbPlaces; i++){
-        distances[i][i] = 0;
-        for (int j = i+1; j<nbPlaces; j++)
-            distances[i][j] = distances[j][i] = rand()%100;
-    }*/
-
-    // solution optimale
-    /*for (int i=0; i<nbPlaces; i++)
-        distances[i][(i+1)%nbPlaces] = distances[(i+1)%nbPlaces][i] = 1 ;*/
-
     optimalLength = nbPlaces;
 }
 
 void problem::setPheromones(int i, int j, int obj){
-    //float ph = 100.f*optimalLength / (obj+1-optimalLength);
     if (obj == 0)
         return;
 
-    float ph = 100.f*optimalLength / (obj);
-
-    pheromones[i][j] += ph;
+    pheromones[i][j] += float(10000*optimalLength) / obj;
 
     if( pheromones[i][j] < borneMin) pheromones[i][j] = borneMin;
     if (pheromones[i][j] > borneMax) pheromones[i][j] = borneMax;
 
-    pheromones[j][i] = pheromones[i][j];
 }
 
 void problem::evaporate(){
@@ -72,13 +57,5 @@ void problem::evaporate(){
             pheromones[i][j] = pheromones[i][j]*(100-evaporation) /100;
             if (pheromones[i][j] < borneMin)
                 pheromones[i][j] = borneMin;
-
-            pheromones[j][i] = pheromones[i][j];
         }
 }
-
-// int nbPlaces;
-// int borneMax = 500, borneMin = 2;
-// evaporation = 1%
-
-// optimalLength

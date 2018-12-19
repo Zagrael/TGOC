@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/nug12.dat";
-const char* FILE_SOLUTION = "../instances/nug12.sln";
+const char* FILE_DATA = "../instances/bur26a.dat";
+const char* FILE_SOLUTION = "../instances/bur26a.sln";
 
 const int N_MAX = 1000;
 int n;
@@ -104,7 +104,7 @@ int main(int argc, char **argv) {
 
     int nbIterations = 300000000;
     double time = 60.0;
-    int nbFourmis = 500;
+    int nbFourmis = 5000;
     srand(0);
     //586 problem p(n, 50, 1, 10);
     //596 en 3 sec problem p(n, 50, 1, 20);
@@ -116,7 +116,7 @@ int main(int argc, char **argv) {
     //586 problem p(n, 250, 1, 5);
     //586 direct, nbF = 5000 problem p(n, 10, 1, 0.1f); problem p(n, 10, 1, 1);problem p(n, 10, 1, 0.1f)
 
-    problem p(n, 100, 1, 0.5f);
+    problem p(n, 1000, 0, 0.5f);
 
     cout<<"\n";
     cout << "Données enregistrées" << endl;

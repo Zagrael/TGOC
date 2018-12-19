@@ -35,7 +35,7 @@ class antSystem {
         problem &data;
 
         // meilleure solution trouvée
-        int bestObj;
+        long bestObj;
         std::vector<int> bestSolution;
 
         int curIteration;

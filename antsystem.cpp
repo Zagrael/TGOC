@@ -20,7 +20,6 @@ antSystem::antSystem(int nbAnt, problem& d):data(d){
         ants.push_back(new ant(data));
 
     bestObj = 9999999999;
-    pathCount = 0;
     curIteration = 0;
 }
 
@@ -58,11 +57,10 @@ void antSystem::run(int n, double duration){
             it++;
         }
 
-        // on évapore les phéromones toutes les 20 itérations
-        // juste histoire de ne pas monopoliser toutes les ressources pour ça
-        if (curIteration % 20 == 0)
             data.evaporate();
 
+        if (curIteration%50==0)
+            std::cout << "Meilleur objectif : " << bestObj << std::endl;
 
         if (duration < durationstart){
             cout<<"Time elapsed : "<<durationstart<<" seconds"<<endl;
