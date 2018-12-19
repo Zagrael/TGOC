@@ -1,0 +1,40 @@
+fichier: bur26a
+       voisinage 0: 5688239
+       voisinage 1: 5435466
+fin fichier --------------
+fichier: chr18a
+       voisinage 0: 24352
+       voisinage 1: 11098
+fin fichier --------------
+fichier: els19
+       voisinage 0: 23352030
+       voisinage 1: 20871282
+fin fichier --------------
+fichier: kra32
+       voisinage 0: 108560
+       voisinage 1: 92670
+fin fichier --------------
+fichier: nug12
+       voisinage 0: 578
+       voisinage 1: 578
+fin fichier --------------
+fichier: nug30
+       voisinage 0: 7030
+       voisinage 1: 6158
+fin fichier --------------
+fichier: sko42
+       voisinage 0: 18558
+       voisinage 1: 15966
+fin fichier --------------
+fichier: tai15a
+       voisinage 0: 395294
+       voisinage 1: 388988
+fin fichier --------------
+fichier: tai15b
+       voisinage 0: 52094846
+       voisinage 1: 51765268
+fin fichier --------------
+fichier: tai100a
+       voisinage 0: 22848046
+       voisinage 1: 21720040
+fin fichier --------------

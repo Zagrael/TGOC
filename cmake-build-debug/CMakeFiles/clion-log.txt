@@ -1,0 +1,4 @@
+/home/arnaud/Applications/apps/CLion/ch-0/183.4588.63/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/arnaud/CLionProjects/TGOC
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/arnaud/CLionProjects/TGOC/cmake-build-debug

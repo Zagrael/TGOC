@@ -13,4 +13,5 @@ using namespace std;
 vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals, int type);
 vector<int> runWithThreads(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals, int numberOfThreads, int type);
 string printVector(vector<int> v);
+int computeObjectiveValue(vector<int> solution);
 #endif //CHALLENGE_TABOU_H

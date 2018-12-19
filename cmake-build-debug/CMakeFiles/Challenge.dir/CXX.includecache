@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/arnaud/CLionProjects/TGOC/Tabou.h
+vector
+-
+string
+-
+
+/home/arnaud/CLionProjects/TGOC/main.cpp
+iostream
+-
+fstream
+-
+string
+-
+ctime
+-
+pthread.h
+-
+unistd.h
+-
+Tabou.h
+/home/arnaud/CLionProjects/TGOC/Tabou.h
+

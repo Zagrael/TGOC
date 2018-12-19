@@ -270,3 +270,4 @@ vector<int> runWithThreads(vector<int> startSol, int n, int tabouSize, int stopA
 
     return bestValue.bestSol;
 }
+

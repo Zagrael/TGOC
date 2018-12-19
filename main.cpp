@@ -74,6 +74,37 @@ bool readSolution() {
 }
 */
 
+void tests(){
+    vector<string> files{"bur26a", "chr18a", "els19", "kra32", "nug12", "nug30", "sko42", "tai15a", "tai15b", "tai100a"};
+    int tabouSize=250;
+    ofstream myfile;
+    for(int i=0;i<10;i++){
+        myfile.open ("dataWithChange.txt", std::ios_base::app);
+        FILE_DATA=std::string("../instances/")+files[i]+std::string(".dat");
+        readData();
+        myfile << std::string("fichier: ")+files[i].c_str()+std::string("\n");
+
+        vector<int>sol(n);
+        for(int i=0;i<n;i++){
+            sol[i]=i+1;
+        }
+
+        myfile << "       voisinage 0: ";
+        myfile << computeObjectiveValue(run(sol, n, tabouSize, 60,300 ,0));
+        myfile << "\n";
+        myfile << "       voisinage 1: ";
+        myfile << computeObjectiveValue(run(sol, n, tabouSize, 60,300 ,1));
+        myfile << "\n";
+
+        myfile << "fin fichier --------------\n";
+        myfile.close();
+
+    }
+    printf("finis !");
+}
+
+
+
 int main() {
     cout << "Hello, World!" << endl;
     //FILE_SOLUTION = "../instances/nug12.sln";
@@ -83,43 +114,8 @@ int main() {
     for(int i=0;i<n;i++){
         sol[i]=i+1;
     }*/
-    vector<string> files{"bur26a", "chr18a", "els19", "kra32", "nug12", "nug30", "sko42", "tai15a", "tai15b", "tai100a"};
-    int tabouSize=50;
-    ofstream myfile;
-    for(int i=0;i<10;i++){
-        myfile.open ("example.txt", std::ios_base::app);
-        tabouSize=50;
-        FILE_DATA=std::string("../instances/")+files[i]+std::string(".dat");
-        readData();
-        myfile << std::string("fichier: ")+files[i].c_str()+std::string("\n");
-        vector<int>sol(n);
-        for(int i=0;i<n;i++){
-            sol[i]=i+1;
-        }
-        myfile.close();
-        for(int j=tabouSize;j<=1050;j=j+100){
-            myfile.open ("example.txt", std::ios_base::app);
-            printf("    tabousize: %d\n", j);
-            myfile << "    tabousize: ";
-            myfile << j;
-            myfile << "\n";
-            //printf("       voisinage 0: ");
-            myfile << "       voisinage 0: ";
-            myfile << printVector(run(sol, n, j, 30,std::numeric_limits<int>::max() ,0));
-            myfile << "       voisinage 1: ";
-            myfile << printVector(run(sol, n, j, 30,std::numeric_limits<int>::max() ,1));
-            myfile.close();
-            //printf("fin1");
+    tests();
 
-        }
-        myfile.open ("example.txt", std::ios_base::app);
-        myfile << "fin fichier --------------\n";
-        myfile.close();
-
-
-
-    }
-    printf("finis !");
 
 
 
