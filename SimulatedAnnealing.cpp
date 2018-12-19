@@ -9,7 +9,7 @@
 #include "SimulatedAnnealing.h"
 
 SimulatedAnnealing::SimulatedAnnealing(std::string dataName, float t, float alpha, int iterByTemp)
-    : QAP(dataName), t(t), alpha(alpha), iterByTemp(iterByTemp) {}
+    : QAP(dataName), t(t), alpha(alpha), iterByTemp(iterByTemp), t_init(t) {}
 
 int *SimulatedAnnealing::run(const float &maxSec) {
     std::cout << "Running Simulated Annealing..." << std::endl;
@@ -82,4 +82,33 @@ int SimulatedAnnealing::choseRandom(float *p) {
         if(r <= pc) return i;
     }
     return -1;
+}
+
+void SimulatedAnnealing::writeSolution(const std::string &method) {
+    std::string fileName = "../results/" + dataName + "-" +  method + ".txt";
+
+    // Read optimal value if file already exists
+    std::ifstream in(fileName);
+    int val = -1;
+    if(in) {
+        int k;
+        in >> k;
+        in >> val;
+    }
+    in.close();
+
+    // Write solution found if better than last one
+    if(val == -1 || objectiveValue <= val) {
+        std::ofstream out(fileName, std::ios::out | std::ios::trunc);
+
+        out << n << "  " << objectiveValue << '\n';
+        for (int i = 0; i < n; i++) {
+            out << "  " << solution[i];
+        }
+        out << '\n';
+
+        out << t_init << "  " << alpha << "  " << iterByTemp << '\n';
+
+        out.close();
+    }
 }

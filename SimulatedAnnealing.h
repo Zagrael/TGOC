@@ -15,6 +15,7 @@
 
 class SimulatedAnnealing : public QAP {
 
+    const float t_init;
     float t;
     float alpha;
     int iterByTemp;
@@ -34,6 +35,7 @@ public:
     int choseRandom(float *p);
     void updateBest(int *s);
 
+    void writeSolution(const std::string &method) override;
 };
 
 

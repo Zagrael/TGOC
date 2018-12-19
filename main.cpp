@@ -25,7 +25,7 @@ int main() {
             "esc16a", "esc16b", "esc16c", "esc16d", "esc16e", "esc16f", "esc16g", "esc16h", "esc16i", "esc16j",
             "esc32e", "esc32g",
             "esc128",
-            "had14", "had16", "had18", "had20",
+            "had12", "had14", "had16", "had18", "had20",
             "kra30a", "kra30b",
             "kra32",
             "lipa20a", "lipa20b",
@@ -90,29 +90,29 @@ int main() {
         /*
          * Apply Simulated Annealing algorithm
          * */
-        try {
-            float maxTimeSA = 60.0f;
-            int tempInit = 10000;
-            float alphaSA = 0.9;
-            int iterByTemp = 1000;
-            SimulatedAnnealing sa(dataName, tempInit, alphaSA, iterByTemp);
-            int *solutionGRASP = sa.run(maxTimeSA);
-            cout << "Solution found with Simulated Annealing :";
-            for (int i = 0; i < sa.getN(); i++) {
-                cout << " " << solutionGRASP[i];
-            }
-            cout << endl << "Admissible solution ? " << (QAP::isAdmissible(sa.getN(), solutionGRASP) ? "YES" : "NO")
-                 << endl;
-            cout << "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
+        float maxTimeSA = 60.0f;
+        for(int q = 0; q <= 3; q++) {
+            int tempInit = (int)pow(10,q) * 1000;
+            for(int a = 0; a <= 2; a++) {
+                auto alphaSA = static_cast<float>(0.7 + (float)a / 10);
+                try {
+                    int iterByTemp = 1000;
+                    SimulatedAnnealing sa(dataName, tempInit, alphaSA, iterByTemp);
+                    int *solutionGRASP = sa.run(maxTimeSA);
+                    cout << "Solution found with Simulated Annealing :";
+                    for (int i = 0; i < sa.getN(); i++) {
+                        cout << " " << solutionGRASP[i];
+                    }
+                    cout << endl << "Admissible solution ? " << (QAP::isAdmissible(sa.getN(), solutionGRASP) ? "YES" : "NO")
+                         << endl;
+                    cout << "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
 
-            sa.displayOptimalSolution();
-            sa.writeSolution(
-                    "SimulatedAnnealing-" +
-                    to_string(tempInit) + "-" +
-                    to_string(alphaSA) + "-" +
-                    to_string(iterByTemp));
-        } catch (const char *msg) {
-            cerr << msg << endl;
+                    sa.displayOptimalSolution();
+                    sa.writeSolution("SimulatedAnnealing");
+                } catch (const char *msg) {
+                    cerr << msg << endl;
+                }
+            }
         }
 
     /******************************************/

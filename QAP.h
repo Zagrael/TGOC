@@ -11,9 +11,9 @@
 
 class QAP {
 
-    std::string dataName;
 
 protected:
+    std::string dataName;
     int n;
     int **F;
     int **D;
@@ -43,7 +43,7 @@ public:
     static bool isAdmissible(const int &n, const int *s);
     bool equals(int *s1, int *s2, int n);
 
-    void writeSolution(const std::string &method);
+    virtual void writeSolution(const std::string &method);
 };
 
 

@@ -35,6 +35,8 @@ public:
     vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol);
     bool isInTabou(list<vector<int>> tabou, vector<int> sol);
     int computeObjectiveValue(vector<int> solution);
+
+    void writeSolution(const std::string &method) override;
 };
 
 

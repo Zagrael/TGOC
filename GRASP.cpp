@@ -311,3 +311,28 @@ int GRASP::computeObjectiveValue(vector<int> solution) {
     }
     return value;
 }
+
+void GRASP::writeSolution(const std::string &method) {
+    std::string fileName = "../results/" + dataName + "-" +  method + ".txt";
+
+    // Read optimal value if file already exists
+    std::ifstream in(fileName);
+    int val = -1;
+    if(in) {
+        int k;
+        in >> k;
+        in >> val;
+    }
+    in.close();
+
+    // Write solution found if better than last one
+    if(val == -1 || objectiveValue < val) {
+        std::ofstream out(fileName, std::ios::out | std::ios::trunc);
+
+        out << n << "  " << objectiveValue << '\n';
+        for (int i = 0; i < n; i++) {
+            out << "  " << solution[i];
+        }
+        out.close();
+    }
+}
