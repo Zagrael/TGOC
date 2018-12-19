@@ -63,8 +63,6 @@ void antSystem::run(int n, double duration){
         if (curIteration % 20 == 0)
             data.evaporate();
 
-        if (curIteration%50==0)
-            std::cout << "Meilleur objectif : " << bestObj << std::endl;
 
         if (duration < durationstart){
             cout<<"Time elapsed : "<<durationstart<<" seconds"<<endl;

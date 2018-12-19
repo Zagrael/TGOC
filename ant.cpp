@@ -7,6 +7,7 @@
 #include "problem.h"
 #include "antexception.h"
 #include <algorithm>
+#include "math.h"
 
 #include "QAP.h"
 
@@ -46,25 +47,24 @@ void ant::findNextSearchDestination(){
     switch(state){
         case NOTHING:{
             //visitedPlaces.push_back(0);
-            int random;
-            random = rand()%data.nbPlaces;
-            visitedPlaces.push_back(random);
+            randomnumber = rand()%data.nbPlaces;
+            visitedPlaces.push_back(randomnumber);
             std::vector<int>::iterator tmp = placesStillToAffect.begin();
             while (tmp != placesStillToAffect.end()){
-                if (*tmp == random){
+                if (*tmp == randomnumber){
                     placesStillToAffect.erase(tmp);
                     break;
                 }
                 tmp++;
             }
 
-            int dest = getNearCity(random);
+            int dest = getNearCity(randomnumber);
             state = SEARCHING_PATH;
-            currentOrigin = random;
+            currentOrigin = randomnumber;
             currentDestination = dest;
-            currentArcPos = random;
-            currentArcLength = data.distances[random][currentDestination];
-            currentArcFlowSize = data.flows[random][currentDestination];
+            currentArcPos = randomnumber;
+            currentArcLength = data.distances[randomnumber][currentDestination];
+            currentArcFlowSize = data.flows[randomnumber][currentDestination];
             currentArcCost = currentArcFlowSize*currentArcLength;
 
             break;
@@ -74,6 +74,7 @@ void ant::findNextSearchDestination(){
 
             visitedPlaces.push_back(currentDestination);
 
+            //erase currentDestination des lieux à affecter
             std::vector<int>::iterator tmp = placesStillToAffect.begin();
             while (tmp != placesStillToAffect.end()){
                 if (*tmp == currentDestination){
@@ -112,15 +113,9 @@ void ant::findNextSearchDestination(){
             break;
         }
         case RETURNING:{
-            if (currentDestination == 0){
+
                 // on a trouvé une solution optimale = visitedPlaces
                 // on change cette solution pour avoir les usines en fonction des emplacements = affectedFactories
-
-                /*cout << "visitedPlaces :" << endl;
-                for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
-                    cout << *i << ' ';
-                }
-                cout << "\n";*/
 
                 int n = 0;
                 for (vector<int>::const_iterator i = visitedPlaces.begin(); i != visitedPlaces.end(); ++i) {
@@ -158,44 +153,57 @@ void ant::findNextSearchDestination(){
                 e.a = this;
                 e.state = antException::TO_REGISTER;
                 throw e;
-            }
 
-            // trouver la ville précédemment visitée et la passer en destination
-            // mettre des phéromones sur l'arc parcouru
-            data.setPheromones(visitedPlaces[currentOrigin], visitedPlaces[currentDestination], objectif );
-            currentOrigin = currentDestination;
-            currentDestination --;
-            currentArcLength = data.distances[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
-            currentArcFlowSize = data.flows[visitedPlaces[currentOrigin]][visitedPlaces[currentDestination]];
-            currentArcCost = currentArcLength*currentArcFlowSize;
-            currentArcPos = currentArcLength;
-
-            break;
         }
     }
 }
 
+
+float ant :: visibility(int i, int j){
+  float visibility = 1/float((data.flows[i][j]+data.flows[j][i]));
+  return visibility;
+ }
+
+
 int ant::getNearCity(int from){
     // roulette sur les chemins restants, pondérés par les phéromones
+    //pheromoneSize = total des phéromones entre le lieu actuel et les autres destinations possibles
     float pheromoneSize = 0;
+    float proba = 0 ;
+    float alpha = 1 ;
+    float beta = 0.2 ;
+    vector<float> probavector;
+
     for (std::size_t i = 0; i < placesStillToAffect.size(); i++){
         if (placesStillToAffect[i] == from)
             continue;
-        pheromoneSize  += data.pheromones[from][placesStillToAffect[i]];
+        if (data.flows[from][placesStillToAffect[i]]==0 || data.flows[placesStillToAffect[i]][from]==0)
+            continue;
+        pheromoneSize  = data.pheromones[from][placesStillToAffect[i]];
+        probavector.push_back(pow(pheromoneSize, alpha) + pow(visibility(from,placesStillToAffect[i]), beta));
+        proba += pow(pheromoneSize, alpha) + pow(visibility(from,placesStillToAffect[i]), beta);
     }
 
-    float found = float(rand()%int(pheromoneSize*10))/float(10)  ;
-    float tmpPheromones = 0;
+    for (int j = 0 ; j<probavector.size() ; j++){
+        probavector[j] = probavector[j]/proba ;
+    }
+
+    float number = 0;
+    srand(time(NULL));
+    number = (float)rand() / (float)RAND_MAX;
+
+    float tmp = 0;
     std::size_t ii = 0;
+
     while (ii < placesStillToAffect.size()){
         if (placesStillToAffect[ii] == from){
             ii++;
             continue;
         }
 
-        tmpPheromones  += data.pheromones[currentDestination][placesStillToAffect[ii]];
+        tmp += probavector[ii];
 
-        if (tmpPheromones   > found)
+        if (tmp > number)
             break;
 
         ii ++;

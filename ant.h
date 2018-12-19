@@ -65,6 +65,7 @@ class ant{
         // flux de la première extrémité de l'arc actuellement parcouru
         int currentArcFlowSize;
 
+        int randomnumber;
         // coût de l'arc
         long currentArcCost;
 
@@ -74,7 +75,7 @@ class ant{
         problem& data;
 
         void findNextSearchDestination();
-
+        float visibility(int, int);
         int getNearCity(int);
 };
 

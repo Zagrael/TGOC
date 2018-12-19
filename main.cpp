@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const char* FILE_DATA = "../instances/tai15b.dat";
-const char* FILE_SOLUTION = "../instances/tai15b.sln";
+const char* FILE_DATA = "../instances/nug12.dat";
+const char* FILE_SOLUTION = "../instances/nug12.sln";
 
 const int N_MAX = 1000;
 int n;
@@ -102,9 +102,9 @@ int main(int argc, char **argv) {
 
     // villes, borne sup, borne inf, coeff d'évaporation en %
 
-    int nbIterations = 3000000;
+    int nbIterations = 300000000;
     double time = 60.0;
-    int nbFourmis = 100000/n;
+    int nbFourmis = 500;
     srand(0);
     //586 problem p(n, 50, 1, 10);
     //596 en 3 sec problem p(n, 50, 1, 20);
@@ -115,7 +115,8 @@ int main(int argc, char **argv) {
     //592 problem p(n, 250, 1, 10);
     //586 problem p(n, 250, 1, 5);
     //586 direct, nbF = 5000 problem p(n, 10, 1, 0.1f); problem p(n, 10, 1, 1);problem p(n, 10, 1, 0.1f)
-    problem p(n, 1000*n, 1, 1/n);
+
+    problem p(n, 100, 1, 0.5f);
 
     cout<<"\n";
     cout << "Données enregistrées" << endl;
