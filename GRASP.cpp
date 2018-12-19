@@ -28,7 +28,7 @@ int *GRASP::run(const float &maxTimeSec) {
 //        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 6, std::numeric_limits<int>::max())[0]));
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxTimeSec);
 
-    std::cout << "End of GRASP !" << std::endl;
+    std::cout << "GRASP ended after " << (clock() - t_init) / CLOCKS_PER_SEC << " sec" << std::endl;
     objectiveValue = QAP::computeObjectiveValue(n, solution);
     delete[] s;
     return solution;

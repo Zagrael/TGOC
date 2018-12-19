@@ -45,7 +45,7 @@ int *SimulatedAnnealing::run(const float &maxSec) {
         updateTemperature();
     } while((float)(clock() - t_init) / CLOCKS_PER_SEC <= maxSec && t >= 1);
 
-    std::cout << "End of Simulated Annealing !" << std::endl;
+    std::cout << "Simulated Annealing ended after " << (clock() - t_init) / CLOCKS_PER_SEC << " sec" << std::endl;
     objectiveValue = computeObjectiveValue(n, solution);
     return solution;
 }
