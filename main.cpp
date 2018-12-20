@@ -69,11 +69,12 @@ int main() {
          * Apply GRASP algorithm
          * */
         try {
+            cout << endl;
             float alphaGRASP = 0.6;
             float maxTimeGRASP = 60.0f;
             GRASP grasp(dataName, alphaGRASP);
             int *solutionGRASP = grasp.run(maxTimeGRASP);
-            cout << "Solution found with GRASP :";
+            cout << endl << "Solution found with GRASP :";
             for (int i = 0; i < grasp.getN(); i++) {
                 cout << " " << solutionGRASP[i];
             }
@@ -81,7 +82,7 @@ int main() {
                  << endl;
             cout << "Objective found with GRASP : " << grasp.getObjectiveValue() << endl;
 
-            grasp.displayOptimalSolution();
+//            grasp.displayOptimalSolution();
             grasp.writeSolution("GRASP");
         } catch (const char *msg) {
             cerr << msg << endl;

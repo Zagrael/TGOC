@@ -13,10 +13,14 @@ int *GRASP::run(const float &maxTimeSec) {
     clock_t t_init = clock();
 
     int *s = new int[n];
-    int tabouSize = 250, stopAfterTime = 10, numberOfEquals = std::numeric_limits<int>::max();
+    int tabouSize = 250, stopAfterTime = 5, numberOfEquals = std::numeric_limits<int>::max();
+
+    // First tabou
+    std::cout << "Initial obj : " << objectiveValue << std::endl;
+    updateBest(&(run(vector<int>(solution, solution + n), n, tabouSize, stopAfterTime, numberOfEquals, 0)[0]));
+    // Then GRASP + Tabou
     do {
         s = greedyProbability(s);
-        // Tabu search only
         updateBest(&(run(vector<int>(s, s + n), n, tabouSize, stopAfterTime, numberOfEquals, 1)[0]));
 
         // Local search + tabu
@@ -181,6 +185,7 @@ void GRASP::updateBest(int *s) {
             solution[i] = s[i];
         }
         objectiveValue = obj;
+        std::cout << "Updated to " << obj << endl;
     }
 }
 
@@ -189,7 +194,7 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
     //stop time en secondes
     vector<int> bestSol=startSol;//[copie OK]
     vector<int> currentSol(n);//[taille OK]
-    vector<int> neighbor(12);
+    vector<int> neighbor(n);
     int myType=type;// 0 ou 1
 
     currentSol=bestSol;//[copie OK]
