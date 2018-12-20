@@ -9,15 +9,17 @@
 GRASP::GRASP(std::string &dataName, float alpha) : QAP(dataName), alpha(alpha) {}
 
 int *GRASP::run(const float &maxTimeSec) {
-    std::cout << "Running GRASP..." << std::endl;
-    clock_t t_init = clock();
-
     int *s = new int[n];
-    int tabouSize = 250, stopAfterTime = 5, numberOfEquals = std::numeric_limits<int>::max();
+    int tabouSize = 250, stopAfterTime = 10;
+//    int numberOfEquals = std::numeric_limits<int>::max();
+    int numberOfEquals = 100;
+
+    std::cout << "Running GRASP..." << std::endl;
+    std::cout << "Initial obj : " << objectiveValue << std::endl;
 
     // First tabou
-    std::cout << "Initial obj : " << objectiveValue << std::endl;
-    updateBest(&(run(vector<int>(solution, solution + n), n, tabouSize, stopAfterTime, numberOfEquals, 0)[0]));
+    clock_t t_init = clock();
+    updateBest(&(run(vector<int>(solution, solution + n), n, tabouSize, stopAfterTime, numberOfEquals, 1)[0]));
     // Then GRASP + Tabou
     do {
         s = greedyProbability(s);
@@ -213,6 +215,7 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
         canContinue = (/*(numberOfBestEquals<=numberOfEquals) and */(difftime(time(0), sysTime)<=stopAfterTime));
         if(numberOfBestEquals>numberOfEquals){
             myType=(myType+1)%2;
+//            std::cout << "Changing neighborhood" << std::endl;
         }
 
         if (tabou.size() == tabouSize) {
@@ -248,18 +251,16 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
     return bestSol;
 }
 
-vector<int> GRASP::bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> sol) {
-    //faire une transposition
+vector<int> GRASP::bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> sol){
     int n=sol.size();
     vector<int> bestNeighbor(n);
     vector<int> currentNeighbor(n);
 
     int bestCost=std::numeric_limits<int>::max();
-    int currentCost=std::numeric_limits<int>::max();
-    /*
+    int currentCost;
+
     for(int i=0;i<n-1;i++){//pour chaque voisin
         for(int j=0;j<n;j++){//on construit le voisin
-
 
             if(i==j){
                 currentNeighbor[j]=sol[j+1];
@@ -269,33 +270,15 @@ vector<int> GRASP::bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> 
                 currentNeighbor[j]=sol[j];
             }
         }
-    */
 
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            for(int k=0;k<n;k++){
-                if(j>i and k==j){
-                    currentNeighbor[k]=sol[i];
-                    currentNeighbor[i]=sol[k];
-                    //printVector(sol);
-                    //printf("------------\n\n");
-                    //printf("%d\n",sol[i]);
-                }else{
-                    currentNeighbor[k]=sol[k];
-                    //printf("t%d\n",sol[i]);
-                }
-            }
+        if(not isInTabou(tabou, currentNeighbor)){
+            currentCost=computeObjectiveValue(currentNeighbor);
 
-            //printVector(currentNeighbor);
-            if(not isInTabou(tabou, currentNeighbor)){
-                currentCost=computeObjectiveValue(currentNeighbor);
+            if(currentCost<bestCost){
+                bestCost=currentCost;
 
-                if(currentCost<bestCost){
-                    bestCost=currentCost;
-
-                    for(int k=0; k<n;k++){
-                        bestNeighbor[k]=currentNeighbor[k];
-                    }
+                for(int k=0; k<n;k++){
+                    bestNeighbor[k]=currentNeighbor[k];
                 }
             }
         }
@@ -303,7 +286,9 @@ vector<int> GRASP::bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> 
     return bestNeighbor;
 }
 
-vector<int> GRASP::bestNeighborNotInTabou1(list<vector<int>> tabou, vector<int> sol) {
+
+
+vector<int> GRASP::bestNeighborNotInTabou1(list<vector<int>> tabou, vector<int> sol){
     int n=sol.size();
     vector<int> bestNeighbor(n);
     vector<int> currentNeighbor(n);

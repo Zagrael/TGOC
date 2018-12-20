@@ -37,6 +37,8 @@ public:
     int **getFlowMatrix() const;
     int **getDistanceMatrix() const;
 
+    void setSolution(int *solution);
+
     // Methods
     virtual int *run(const float &maxTimeSec) = 0; // Start an algorithm
     void displayOptimalSolution() const;

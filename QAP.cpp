@@ -165,3 +165,7 @@ void QAP::writeSolution(const std::string &method) {
         out.close();
     }
 }
+
+void QAP::setSolution(int *solution) {
+    this->solution = solution;
+}
