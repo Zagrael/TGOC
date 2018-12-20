@@ -31,8 +31,9 @@ public:
     void updateBest(int *s);
 
     // Tabu functions
-    vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals);
-    vector<int> bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol);
+    vector<int> run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals, int type);
+    vector<int> bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> sol);
+    vector<int> bestNeighborNotInTabou1(list<vector<int>> tabou, vector<int> sol);
     bool isInTabou(list<vector<int>> tabou, vector<int> sol);
     int computeObjectiveValue(vector<int> solution);
 

@@ -51,18 +51,18 @@ int main() {
     };
     int nFiles = sizeof(files) / sizeof(*files);
     // Uncomment these lines before using the executable !
-//    char rep;
-//    do {
-//        system("CLS");
-//        cout << "Data name (bur26a, chr18a, els19, kra32, nug12, nug30, sko42, tai15a, tai15b, tai100a, ...) : ";
-//        cin >> dataName;
+    char rep;
+    do {
+        system("CLS");
+        cout << "Data name (bur26a, chr18a, els19, kra32, nug12, nug30, sko42, tai15a, tai15b, tai100a, ...) : ";
+        cin >> dataName;
     /********************************************/
 
     // Uncomment this line to run all files
-    cout << "Testing with " << nFiles << " files" << endl;
-    for(int zk = 0; zk < nFiles; zk++) {
-        dataName = files[zk];
-        cout << "Trying " << dataName << endl;
+//    cout << "Testing with " << nFiles << " files" << endl;
+//    for(int zk = 0; zk < nFiles; zk++) {
+//        dataName = files[zk];
+//        cout << "Trying " << dataName << endl;
     /*********************************************/
 
         /*
@@ -90,38 +90,34 @@ int main() {
         /*
          * Apply Simulated Annealing algorithm
          * */
-        float maxTimeSA = 60.0f;
-        for(int q = 0; q <= 3; q++) {
-            int tempInit = (int)pow(10,q) * 1000;
-            for(int a = 0; a <= 2; a++) {
-                auto alphaSA = static_cast<float>(0.7 + (float)a / 10);
-                try {
-                    int iterByTemp = 1000;
-                    SimulatedAnnealing sa(dataName, tempInit, alphaSA, iterByTemp);
-                    int *solutionGRASP = sa.run(maxTimeSA);
-                    cout << "Solution found with Simulated Annealing :";
-                    for (int i = 0; i < sa.getN(); i++) {
-                        cout << " " << solutionGRASP[i];
-                    }
-                    cout << endl << "Admissible solution ? " << (QAP::isAdmissible(sa.getN(), solutionGRASP) ? "YES" : "NO")
-                         << endl;
-                    cout << "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
-
-                    sa.displayOptimalSolution();
-                    sa.writeSolution("SimulatedAnnealing");
-                } catch (const char *msg) {
-                    cerr << msg << endl;
-                }
-            }
-        }
+//        float maxTimeSA = 60.0f;
+//        int tempInit = 10000;
+//        float alphaSA = 0.7;
+//        try {
+//            int iterByTemp = 1000;
+//            SimulatedAnnealing sa(dataName, tempInit, alphaSA, iterByTemp);
+//            int *solutionGRASP = sa.run(maxTimeSA);
+//            cout << "Solution found with Simulated Annealing :";
+//            for (int i = 0; i < sa.getN(); i++) {
+//                cout << " " << solutionGRASP[i];
+//            }
+//            cout << endl << "Admissible solution ? " << (QAP::isAdmissible(sa.getN(), solutionGRASP) ? "YES" : "NO")
+//                 << endl;
+//            cout << "Objective found with Simulated Annealing : " << sa.getObjectiveValue() << endl;
+//
+//            sa.displayOptimalSolution();
+//            sa.writeSolution("SimulatedAnnealing");
+//        } catch (const char *msg) {
+//            cerr << msg << endl;
+//        }
 
     /******************************************/
-    }
-    system("pause");
+//    }
+//    system("pause");
         // Uncomment these lines before using the executable !
-//        cout << "Try with another file ? (Y/N) ";
-//        cin >> rep;
-//    } while(rep != 'N');
+        cout << "Try with another file ? (Y/N) ";
+        cin >> rep;
+    } while(rep != 'N');
     /************************************/
     return 0;
 }

@@ -13,10 +13,11 @@ int *GRASP::run(const float &maxTimeSec) {
     clock_t t_init = clock();
 
     int *s = new int[n];
+    int tabouSize = 250, stopAfterTime = 10, numberOfEquals = std::numeric_limits<int>::max();
     do {
         s = greedyProbability(s);
         // Tabu search only
-        updateBest(&(run(vector<int>(s, s + n), n, std::numeric_limits<int>::max(), 10, std::numeric_limits<int>::max())[0]));
+        updateBest(&(run(vector<int>(s, s + n), n, tabouSize, stopAfterTime, numberOfEquals, 1)[0]));
 
         // Local search + tabu
 //        s = localSearch(s);
@@ -183,13 +184,16 @@ void GRASP::updateBest(int *s) {
     }
 }
 
-vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals) {
+vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfterTime, int numberOfEquals, int type) {
+    //numberOfEquals: nombre de best sol egales avant qu'on change de voisinage
     //stop time en secondes
     vector<int> bestSol=startSol;//[copie OK]
     vector<int> currentSol(n);//[taille OK]
     vector<int> neighbor(12);
+    int myType=type;// 0 ou 1
+
     currentSol=bestSol;//[copie OK]
-    int currentCost=std::numeric_limits<int>::max();
+    int currentCost;
     int bestCost=std::numeric_limits<int>::max();
     list<vector<int>>:: iterator it;
 
@@ -201,14 +205,21 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
     int numberOfBestEquals=0;
 
     while(canContinue) {
-        canContinue = ((numberOfBestEquals<=numberOfEquals) and (difftime(time(0), sysTime)<=stopAfterTime));
+        canContinue = (/*(numberOfBestEquals<=numberOfEquals) and */(difftime(time(0), sysTime)<=stopAfterTime));
+        if(numberOfBestEquals>numberOfEquals){
+            myType=(myType+1)%2;
+        }
 
         if (tabou.size() == tabouSize) {
             tabou.pop_back();
         }
         tabou.push_front(currentSol);
 
-        neighbor = bestNeighborNotInTabou(tabou, currentSol);
+        if(myType==0){
+            neighbor = bestNeighborNotInTabou0(tabou, currentSol);
+        }else{
+            neighbor = bestNeighborNotInTabou1(tabou, currentSol);
+        }
         currentSol=neighbor;
         currentCost = computeObjectiveValue(currentSol);
 
@@ -225,7 +236,6 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
         for(int j=0;j<n;j++){
             currentSol[j]=neighbor[j];
         }
-        //printVector(bestSol);
 
     }
 
@@ -233,7 +243,7 @@ vector<int> GRASP::run(vector<int> startSol, int n, int tabouSize, int stopAfter
     return bestSol;
 }
 
-vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> sol) {
+vector<int> GRASP::bestNeighborNotInTabou0(list<vector<int>> tabou, vector<int> sol) {
     //faire une transposition
     int n=sol.size();
     vector<int> bestNeighbor(n);
@@ -272,6 +282,42 @@ vector<int> GRASP::bestNeighborNotInTabou(list<vector<int>> tabou, vector<int> s
             }
 
             //printVector(currentNeighbor);
+            if(not isInTabou(tabou, currentNeighbor)){
+                currentCost=computeObjectiveValue(currentNeighbor);
+
+                if(currentCost<bestCost){
+                    bestCost=currentCost;
+
+                    for(int k=0; k<n;k++){
+                        bestNeighbor[k]=currentNeighbor[k];
+                    }
+                }
+            }
+        }
+    }
+    return bestNeighbor;
+}
+
+vector<int> GRASP::bestNeighborNotInTabou1(list<vector<int>> tabou, vector<int> sol) {
+    int n=sol.size();
+    vector<int> bestNeighbor(n);
+    vector<int> currentNeighbor(n);
+
+    int bestCost=std::numeric_limits<int>::max();
+    int currentCost;
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            for(int k=0;k<n;k++){
+                if(j>i and k==j){
+                    currentNeighbor[k]=sol[i];
+                    currentNeighbor[i]=sol[k];
+
+                }else{
+                    currentNeighbor[k]=sol[k];
+                }
+            }
+
             if(not isInTabou(tabou, currentNeighbor)){
                 currentCost=computeObjectiveValue(currentNeighbor);
 
