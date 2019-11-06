@@ -1,0 +1,11 @@
+Présentatin "orale" (5 min) : Pourquoi cette méthode ?, comment implémentée ?, comment testée ? + avis (content, pas content, on aurait dû faire ci, etc.)
+
+livrables : slides, codes sources, outputs des 3 challenges (par mail après la présentation)
+
+Utilisation d'une méthode vue au cours
+Langage de programmation au choix
+Temps de résolution inférieure à 1 minute
+
+Programmation non linéaire => La solution ne se trouve pas nécessairement sur un sommet !
+
+Inputs (txt) :

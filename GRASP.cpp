@@ -10,7 +10,7 @@ GRASP::GRASP(std::string &dataName, float alpha) : QAP(dataName), alpha(alpha) {
 
 int *GRASP::run(const float &maxTimeSec) {
     int *s = new int[n];
-    int tabouSize = 250, stopAfterTime = 10;
+    int tabouSize = 250, stopAfterTime = 30;
 //    int numberOfEquals = std::numeric_limits<int>::max();
     int numberOfEquals = 100;
 

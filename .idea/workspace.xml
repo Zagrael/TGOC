@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/GRASP.cpp" line="124" />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Challenge" targetName="Challenge" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="88ac207f-eaa8-41f8-9e19-2d76286b9271" name="Default Changelist" comment="Ok je commit">
+      <change beforePath="$PROJECT_DIR$/GRASP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GRASP.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QAP.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+              <folding>
+                <element signature="e#92#111#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/QAP.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="169" column="30" lean-forward="true" selection-start-line="169" selection-start-column="30" selection-end-line="169" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/instances/ste36a.sln">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GRASP.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5693">
+              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GRASP.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+              <folding>
+                <element signature="e#96#115#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="83">
+              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>numberOfbestequals</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Aymerick" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/instances/nug12.sln" />
+        <option value="$PROJECT_DIR$/common.cpp" />
+        <option value="$PROJECT_DIR$/common.h" />
+        <option value="$PROJECT_DIR$/Tabou.h" />
+        <option value="$PROJECT_DIR$/Tabou.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/SimulatedAnnealing.h" />
+        <option value="$PROJECT_DIR$/SimulatedAnnealing.cpp" />
+        <option value="$PROJECT_DIR$/GRASP.h" />
+        <option value="$PROJECT_DIR$/QAP.h" />
+        <option value="$PROJECT_DIR$/QAP.cpp" />
+        <option value="$PROJECT_DIR$/GRASP.cpp" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="675" />
+    <option name="width" value="698" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Challenge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Challenge" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Challenge" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Challenge" type="462c0819:PsiDirectoryNode" />
+              <item name="instances" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Aymerick\Documents\MA1 - Ing Civil IG\Q1\Graphes et Optimisation combinatoire\Challenge" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Challenge" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Challenge" TARGET_NAME="Challenge" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Challenge" RUN_TARGET_NAME="Challenge">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88ac207f-eaa8-41f8-9e19-2d76286b9271" name="Default Changelist" comment="" />
+      <created>1544284983487</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544284983487</updated>
+      <workItem from="1544284986513" duration="6957000" />
+      <workItem from="1544521224970" duration="4827000" />
+      <workItem from="1544538709586" duration="1959000" />
+      <workItem from="1544548342432" duration="5573000" />
+      <workItem from="1544649275560" duration="4407000" />
+      <workItem from="1544686659866" duration="6260000" />
+      <workItem from="1544722531475" duration="12223000" />
+      <workItem from="1544740582152" duration="144000" />
+      <workItem from="1544791909285" duration="10585000" />
+      <workItem from="1544809292451" duration="4669000" />
+      <workItem from="1544819902586" duration="893000" />
+      <workItem from="1544871415676" duration="12993000" />
+      <workItem from="1544976586618" duration="6414000" />
+      <workItem from="1545042476643" duration="3337000" />
+      <workItem from="1545137151669" duration="14620000" />
+      <workItem from="1545222638710" duration="9794000" />
+      <workItem from="1545289230825" duration="12862000" />
+      <workItem from="1545315535995" duration="2094000" />
+      <workItem from="1545335060185" duration="475000" />
+    </task>
+    <task id="LOCAL-00002" summary="Declaration of function GRASP">
+      <created>1544540570344</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1544540570344</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Creation of GRASP class">
+      <created>1544548473409</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1544548473409</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Creation of GRASP class">
+      <created>1544553277335</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1544553277335</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding constructor for GRASP">
+      <created>1544650352358</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1544650352358</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding setters for solution and objective value in GRASP">
+      <created>1544650430455</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1544650430455</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Writing functions declaration">
+      <created>1544650870124</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544650870124</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Implemented run function (with time limit)">
+      <created>1544651531215</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1544651531215</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Changing main file">
+      <created>1544651771652</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1544651771652</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Adding file for common global variable N_MAX">
+      <created>1544652124469</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1544652124469</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Modif const int N_MAX in common.h">
+      <created>1544652228805</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1544652228805</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Changing run return value and add main calling">
+      <created>1544652404715</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1544652404715</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Changing run return value and add main calling">
+      <created>1544652610744</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1544652610744</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Adding QAP class">
+      <created>1544652742858</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1544652742858</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Implementing updateBest">
+      <created>1544653101080</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1544653101080</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Gosh the rand() function in deprecated...">
+      <created>1544653712884</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1544653712884</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Greedy function (no probability)">
+      <created>1544692534003</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1544692534003</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add verification of solution (admissible)">
+      <created>1544692927632</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1544692927632</updated>
+    </task>
+    <task id="LOCAL-00019" summary="GRASP works with nug12">
+      <created>1544731748339</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1544731748339</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Random works a bit better">
+      <created>1544733872931</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1544733872931</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Change back order of matrix in readData()">
+      <created>1544792450039</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1544792450039</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Adding function to find a random solution">
+      <created>1544796014457</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1544796014457</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Constructed SimulatedAnnealing">
+      <created>1544798155094</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1544798155094</updated>
+    </task>
+    <task id="LOCAL-00024" summary="j">
+      <created>1544803060144</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1544803060144</updated>
+    </task>
+    <task id="LOCAL-00025" summary="SA works">
+      <created>1544812470980</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1544812470980</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Everything works ! but only with some small files...">
+      <created>1544820753723</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1544820753739</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Created class QAP">
+      <created>1544879503660</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1544879503660</updated>
+    </task>
+    <task id="LOCAL-00028" summary="GRASP implemented">
+      <created>1544883348851</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1544883348851</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Doing some user interface&#10;Note : GRASP works from nug12 to tai15b (excluded)">
+      <created>1544884283563</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1544884283563</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Now works with every files !!!">
+      <created>1544886208579</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1544886208579</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Reduced computeProbabilities()">
+      <created>1544976887976</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1544976887976</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Implemented a local search">
+      <created>1544979904065</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1544979904065</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Changed default dataName">
+      <created>1544979942487</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1544979942487</updated>
+    </task>
+    <task id="LOCAL-00034" summary="mouais :/">
+      <created>1544980709002</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1544980709002</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Commented the disp">
+      <created>1544983963165</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1544983963165</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Stopped this local search !!">
+      <created>1545046366999</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1545046366999</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Removed condition in loop">
+      <created>1545138358645</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1545138358645</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Added tabu functions">
+      <created>1545139372860</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1545139372860</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Correction of some warnings">
+      <created>1545140063288</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1545140063289</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Tried some tabuuuuuuuuus">
+      <created>1545143840385</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1545143840385</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Je commit et je push">
+      <created>1545149096535</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1545149096535</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Je commit et je push une seconde fois">
+      <created>1545150555429</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1545150555429</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Changing number of files in loop">
+      <created>1545151654558</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1545151654558</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Added some files">
+      <created>1545224316868</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1545224316868</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Writing solutions in files">
+      <created>1545230135409</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1545230135409</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Adding some instances :)">
+      <created>1545230207185</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1545230207185</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Writing parameters in files">
+      <created>1545233348174</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1545233348174</updated>
+    </task>
+    <task id="LOCAL-00048" summary="New Tabu">
+      <created>1545292031953</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1545292031953</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Final code">
+      <created>1545295697207</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1545295697207</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Ok je commit">
+      <created>1545303600395</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1545303600397</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="121086000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20196672" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25531915" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.2569558" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="CMake" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19288956" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25531915" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="CMake" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Everything works ! but only with some small files..." />
+    <MESSAGE value="Created class QAP" />
+    <MESSAGE value="GRASP implemented" />
+    <MESSAGE value="Doing some user interface&#10;Note : GRASP works from nug12 to tai15b (excluded)" />
+    <MESSAGE value="Now works with every files !!!" />
+    <MESSAGE value="Reduced computeProbabilities()" />
+    <MESSAGE value="Implemented a local search" />
+    <MESSAGE value="Changed default dataName" />
+    <MESSAGE value="mouais :/" />
+    <MESSAGE value="Commented the disp" />
+    <MESSAGE value="Stopped this local search !!" />
+    <MESSAGE value="Removed condition in loop" />
+    <MESSAGE value="Added tabu functions" />
+    <MESSAGE value="Correction of some warnings" />
+    <MESSAGE value="Tried some tabuuuuuuuuus" />
+    <MESSAGE value="Je commit et je push" />
+    <MESSAGE value="Je commit et je push une seconde fois" />
+    <MESSAGE value="Changing number of files in loop" />
+    <MESSAGE value="Added some files" />
+    <MESSAGE value="Writing solutions in files" />
+    <MESSAGE value="Adding some instances :)" />
+    <MESSAGE value="Writing parameters in files" />
+    <MESSAGE value="New Tabu" />
+    <MESSAGE value="Final code" />
+    <MESSAGE value="Ok je commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ok je commit" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/instances/tai15a.dat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/els19.dat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nug12.txt" />
+    <entry file="file://$PROJECT_DIR$/instances/tai100a.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3182" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/bur26a.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/nug30.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/tai100a.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.cpp" />
+    <entry file="file://$PROJECT_DIR$/instances/chr18a.dat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.h" />
+    <entry file="file://$PROJECT_DIR$/instances/bur26a.dat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/sko42.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/sko42.dat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/nug12.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/nug12.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tabou.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tabou.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="127" selection-start-line="5" selection-start-column="127" selection-end-line="5" selection-end-column="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Intro.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimulatedAnnealing.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimulatedAnnealing.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding>
+            <element signature="e#122#139#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/tai15a.sln">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/tai15b.dat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/tai15b.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/ste36a.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4586" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/sko100c.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/tai17a.sln">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/els19.sln">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/kra32.sln">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GRASP.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding>
+            <element signature="e#96#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GRASP.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5693">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QAP.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+          <folding>
+            <element signature="e#92#111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/QAP.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="169" column="30" lean-forward="true" selection-start-line="169" selection-start-column="30" selection-end-line="169" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/ste36a.sln">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

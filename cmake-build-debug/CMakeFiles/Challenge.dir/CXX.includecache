@@ -1,0 +1,60 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/GRASP.h
+iostream
+-
+time.h
+-
+vector
+-
+algorithm
+-
+list
+-
+QAP.h
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/QAP.h
+
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/QAP.h
+iostream
+-
+fstream
+-
+string
+-
+
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/SimulatedAnnealing.h
+time.h
+-
+cmath
+-
+iterator
+-
+algorithm
+-
+iostream
+-
+string
+-
+QAP.h
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/QAP.h
+
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/main.cpp
+iostream
+-
+fstream
+-
+string
+-
+time.h
+-
+GRASP.h
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/GRASP.h
+SimulatedAnnealing.h
+C:/Users/Aymerick/Documents/MA1 - Ing Civil IG/Q1/Graphes et Optimisation combinatoire/Challenge/SimulatedAnnealing.h
+
